@@ -22,7 +22,7 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand p-0 mr-5" href="/home"><img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40" style="padding-right: 15px;">Muralha</a>
-            <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div>
+            <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars"></span></a> </div>
             <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item dropdown  user-menu">
@@ -45,26 +45,14 @@
           <div class="sidebar left ">
             <div class="user-panel">
               <div class="pull-left image">
-                <img src="https://image.flaticon.com/icons/svg/62/62666.svg" class="rounded-circle" alt="User Image">
+                <img src="https://openclipart.org/image/2400px/svg_to_png/250353/icon_user_whiteongrey.png" class="rounded-circle" alt="User Image">
               </div>
               <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
               </div>
             </div>
             <ul class="list-sidebar bg-defoult">
-              <li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active" > <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span> <span class="fa fa-chevron-left pull-right"></span> </a>
-                <ul class="sub-menu collapse" id="dashboard">
-                  <li class="active"><a href="#">CSS3 Animation</a></li>
-                  <li><a href="#">General</a></li>
-                  <li><a href="#">Buttons</a></li>
-                  <li><a href="#">Tabs & Accordions</a></li>
-                  <li><a href="#">Typography</a></li>
-                  <li><a href="#">FontAwesome</a></li>
-                  <li><a href="#">Slider</a></li>
-                  <li><a href="#">Panels</a></li>
-                  <li><a href="#">Widgets</a></li>
-                  <li><a href="#">Bootstrap Model</a></li>
-                </ul>
+              <li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active" > <i class="fa fa-th-large"></i> <span class="nav-label"> Processos Seletivos </span></a>
               </li>
               <li> <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a> </li>
               <li> <a href="#" data-toggle="collapse" data-target="#products" class="collapsed active" > <i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span> <span class="fa fa-chevron-left pull-right"></span> </a>
