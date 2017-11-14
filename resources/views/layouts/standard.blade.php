@@ -11,19 +11,25 @@
 <body>
   <header class="header">
     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
-      <a class="navbar-brand p-0 mr-5" href="/home"><img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40" style="padding-right: 15px;">
-      </a>
-      <div id="navbarNavDropdown">
-        <ul class="navbar-nav pull-right" id="listaUser">
-          <li class="nav-item dropdown  user-menu">
-            <a href="http://example.com" id="navbarDropdownMenuLink">
-              <img src="https://www.adjust.com/new-assets/images/site-images/interface/user.svg" class="user-image " alt="User Image" >
-              <span class="hidden-xs">{{ Auth::user()->name }}</span>
-            </a>
-          </li>
-        </ul>
+      <div class="row">
+        <div class="col-md-4" id="navbarLeft">
+          <a href="/home">
+            <img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40" style="padding-right: 15px;">
+            <span id="nomeSite">Muralha</span>
+          </a>          
+        </div>
+        <div class="col-md-8" id="navbarRight">
+          <ul class="navbar-nav" id="listaUser">
+            <li class="nav-item dropdown  user-menu">
+              <a href="http://example.com" id="navbarDropdownMenuLink">
+                <img src="https://www.adjust.com/new-assets/images/site-images/interface/user.svg" class="user-image " alt="User Image" >
+                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </naxv>
   </header>
   <div class="main">
     <aside>
@@ -31,20 +37,11 @@
       <div class="item">
         <span class="glyphicon glyphicon-plus"></span><a href="#">Cadastro</a>
       </div>
-      <div class="item active">
-        <span class="glyphicon glyphicon-th-list"></span><a href="#">Cadastro</a>
+      <div class="item">
+        <span class="glyphicon glyphicon-asterisk"></span><a href="#">Processos Seletivos</a>
       </div>
       <div class="item">
-        <span class="glyphicon glyphicon-log-out"></span>
-      </div>
-      <div class="item">
-        <span class="glyphicon glyphicon-log-in"></span>
-      </div> 
-      <div class="item">
-        <span class="glyphicon glyphicon-random"></span>
-      </div>
-      <div class="item">
-        <span class="glyphicon glyphicon-remove"></span>
+        <span class="glyphicon glyphicon-minus"></span><a href="#">Sair</a>
       </div>    
     </div>
   </aside>
