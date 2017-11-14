@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-md-4" id="navbarLeft">
           <a href="/home">
-            <img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40" style="padding-right: 15px;">
+            <img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40">
             <span id="nomeSite">Muralha</span>
           </a>          
         </div>
@@ -35,7 +35,7 @@
     <aside>
      <div class="left">
       <div class="item">
-        <span class="glyphicon glyphicon-plus"></span><a href="#">Cadastro</a>
+        <span class="glyphicon glyphicon-plus"></span><a href="/profile">Cadastro</a>
       </div>
       <div class="item">
         <span class="glyphicon glyphicon-asterisk"></span><a href="#">Processos Seletivos</a>
@@ -46,4 +46,5 @@
     </div>
   </aside>
 </div>
+ @yield('content')
 </body>
