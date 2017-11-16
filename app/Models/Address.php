@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model{
-    public function profiles(){         
-    return $this->belongsTo('App\Models\Profile');
-    }
+class Address extends Model
+{
+    //
 }

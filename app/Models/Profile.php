@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model{
-    public function addresses(){
-    return $this->hasMany('App\Models\Address');
-    }
+class Profile extends Model
+{
+    //
 }
