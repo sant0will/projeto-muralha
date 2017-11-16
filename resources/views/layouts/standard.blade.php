@@ -35,13 +35,13 @@
     <aside>
      <div class="left">
       <div class="item">
-        <span class="glyphicon glyphicon-plus"></span><a href="/profile">Cadastro</a>
+        <span class="fa fa-plus-square"></span><a href="/profile">Cadastro</a>
       </div>
       <div class="item">
-        <span class="glyphicon glyphicon-asterisk"></span><a href="#">Processos Seletivos</a>
+        <span class="fa fa-graduation-cap"></span><a href="#">Processos Seletivos</a>
       </div>
       <div class="item">
-        <span class="glyphicon glyphicon-minus"></span><a href="#">Sair</a>
+        <span class="fa fa-sign-out"></span><a href="#">Sair</a>
       </div>    
     </div>
   </aside>
