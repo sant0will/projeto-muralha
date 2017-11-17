@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User as User;
+use App\Models\Profile as Profile;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $profiles = Profile::all();
+        return view('home')->with('profiles', $profiles);
     }
 }

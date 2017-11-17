@@ -35,7 +35,13 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profile = $this->validate(request(), [
+          'nome' => 'required',
+          ]);
+
+       Product::create($product);
+
+       return redirect('products')->with('message', 'Produto Adicionado!');
     }
 
     /**

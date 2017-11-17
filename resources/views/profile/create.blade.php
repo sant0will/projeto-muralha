@@ -6,9 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
   <style>
     .othertop{margin-top:10px;}
+    .input-group-addon{width: 45px;}
+    
     
   </style>
 
@@ -18,13 +23,16 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
-        <form class="form-horizontal">
-          <div class="panel-heading">Cadastro</div>
+
+        <form class="form-horizontal" method="post" action="{{url('profiles')}}">
+          <div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
           <div class="content"> 
             <fieldset>
+
+              <!--Nome-->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="Name (Full name)">Nome Completo</label>  
-                <div class="col-md-4">
+                <div class="col-md-7">
                  <div class="input-group">
                    <div class="input-group-addon">
                     <i class="fa fa-user">
@@ -34,58 +42,63 @@
                 </div>
               </div>
             </div>
-            <!-- Text input-->
+
+            <!-- Data -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="Date Of Birth">Data de Nascimento</label>  
-              <div class="col-md-4">
+              <div class="col-md-7">
                 <div class="input-group">
                  <div class="input-group-addon">
                    <i class="fa fa-birthday-cake"></i>
                  </div>
-                 <input id="Date Of Birth" name="data_nascimento" type="text" placeholder="Data de Nascimento" class="form-control input-md">
+                 <input id="Date Of Birth" name="date" type="date" placeholder="Data de Nascimento" class="form-control input-md">
                </div>
+               <script>
+                $(document).ready(function(){
+                  var date_input=$('input[name="date"]'); //our date input has the name "date"
+                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                  date_input.datepicker({
+                    format: 'dd/mm/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                  })
+                })
+              </script>
+            </div>
+          </div>
 
 
-             </div>
-           </div>
-
-
-           <!-- Text input-->
-           <div class="form-group">
+          <!-- Nome Pai -->
+          <div class="form-group">
             <label class="col-md-4 control-label" for="Father">Nome do Pai</label>  
-            <div class="col-md-4">
+            <div class="col-md-7">
               <div class="input-group">
                <div class="input-group-addon">
                 <i class="fa fa-male" style="font-size: 20px;"></i>
-
               </div>
               <input id="Father" name="nome_pai" type="text" placeholder="Nome do Pai" class="form-control input-md">
-
             </div>
-
           </div>
         </div>
 
-        <!-- Text input-->
+        <!-- Nome mãe -->
         <div class="form-group">
           <label class="col-md-4 control-label" for="Mother">Nome da Mãe</label>  
-          <div class="col-md-4">
+          <div class="col-md-7">
             <div class="input-group">
              <div class="input-group-addon">
               <i class="fa fa-female" style="font-size: 20px;"></i>
-
             </div>
             <input id="Mother" name="nome_mae" type="text" placeholder="Nome da Mãe" class="form-control input-md">
-
           </div>
-
         </div>
       </div>
 
-      <!-- Multiple Radios (inline) -->
+      <!-- Genero -->
       <div class="form-group">
         <label class="col-md-4 control-label" for="Gender">Genêro</label>
-        <div class="col-md-4"> 
+        <div class="col-md-6"> 
           <label class="radio-inline" for="Gender-0">
             <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
             Masculino
@@ -101,70 +114,59 @@
         </div>
       </div>
 
-      <!-- Text input-->
+      <!-- RG -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="Mother">RG</label>  
+        <label class="col-md-4 control-label">RG</label>  
         <div class="col-md-4">
           <div class="input-group">
            <div class="input-group-addon">
             <i class="fa fa-id-card-o" style="font-size: 20px;"></i>
-
           </div>
-          <input id="Mother" name="rg" type="text" placeholder="RG" class="form-control input-md">
-
+          <input name="rg" type="text" placeholder="RG" class="form-control input-md">
         </div>
-
       </div>
     </div>
 
-    <!-- Text input-->
+    <!-- Emissor RG -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="Mother">Emissor RG</label>  
+      <label class="col-md-4 control-label">Emissor RG</label>  
       <div class="col-md-4">
         <div class="input-group">
          <div class="input-group-addon">
           <i class="fa fa-id-card-o" style="font-size: 20px;"></i>
-
         </div>
-        <input id="Mother" name="emissor_rg" type="text" placeholder="Emissor RG" class="form-control input-md">
-
+        <input name="emissor_rg" type="text" placeholder="Emissor RG" class="form-control input-md">
       </div>
-
     </div>
   </div>
 
-  <!-- Text input-->
+  <!-- CPF -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="Mother">CPF</label>  
+    <label class="col-md-4 control-label">CPF</label>  
     <div class="col-md-4">
       <div class="input-group">
        <div class="input-group-addon">
         <i class="fa fa-id-card" style="font-size: 20px;"></i>
-
       </div>
-      <input id="Mother" name="cpf" type="text" placeholder="CPF" class="form-control input-md">
-
+      <input name="cpf" type="text" placeholder="CPF" class="form-control input-md">
     </div>
-
   </div>
 </div>
 
-<!-- Text input-->
+<!-- Passaporte -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="Mother">Passaporte</label>  
+  <label class="col-md-4 control-label">Passaporte</label>  
   <div class="col-md-4">
     <div class="input-group">
      <div class="input-group-addon">
       <i class="fa fa-book" style="font-size: 20px;"></i>
-
     </div>
-    <input id="Mother" name="passporte" type="text" placeholder="Passaporte" class="form-control input-md">
-
+    <input name="passporte" type="text" placeholder="Passaporte" class="form-control input-md">
   </div>
-
 </div>
 </div>
 
+<!-- Endereço -->
 <div class="form-group">
   <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
   <div class="col-md-4  col-xs-4">
@@ -209,7 +211,7 @@
   </div>
 </div>
 
-<!-- Multiple Radios (inline) -->
+<!-- Tipo Endereço -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="tipo_endereco"> Tipo de Endereço</label>
   <div class="col-md-4"> 
@@ -224,88 +226,90 @@
   </div>
 </div>
 
-<!-- Text input-->
+<!-- Escolaridade -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Skills">Escolaridade</label>  
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="input-group">
      <div class="input-group-addon">
        <i class="fa fa-graduation-cap"></i>
-
      </div>
      <input id="Skills" name="escolaridade" type="text" placeholder="Escolaridade" class="form-control input-md">
    </div>
-
-
  </div>
 </div>
 
-<!-- Text input-->
+<!-- Telefones -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Phone number ">Numero de Telefone</label>  
   <div class="col-md-4">
     <div class="input-group">
      <div class="input-group-addon">
        <i class="fa fa-phone"></i>
-
      </div>
      <input id="Phone number " name="telefone" type="text" placeholder="Telefone Fixo" class="form-control input-md">
-
    </div>
    <div class="input-group othertop">
      <div class="input-group-addon">
        <i class="fa fa-mobile fa-1x" style="font-size: 20px;"></i>
-
      </div>
      <input id="Phone number " name="celular" type="text" placeholder="Telefone Celular" class="form-control input-md">
-
    </div>
-
  </div>
 </div>
 
-<!-- Multiple Radios (inline) -->
+<!-- Necessidades Especiais -->
 <div class="form-group">
   <label class="col-md-4 control-label">Nessecidades Especiais</label>
   <div class="col-md-4"> 
     <label class="radio-inline">
-      <input type="radio" name="ness" value="1" onchange="habilitar()">
+      <input type="radio" name="ness" value="1" onclick="habilitar()">
       Sim
     </label>
   </div> 
   <div class="col-md-4"> 
     <label class="radio-inline">
-    <input type="radio" name="ness" value="2"  checked="checked">
+      <input type="radio" name="ness" value="2"  checked="checked" onclick="desabilitar()">
       Não
     </label> 
   </div>
 </div>
 
-<!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Mother"></label>  
-        <div class="col-md-4">
-          <div class="input-group">
-           <div class="input-group-addon">
-            <i class="fa fa-id-card-o" style="font-size: 20px;"></i>
-
-          </div>
-          <input id="ness" name="rg" type="text" placeholder="Descrição" class="form-control input-md" disabled>
-
-        </div>
-
-      </div>
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>  
+  <div class="col-md-6">
+    <div class="input-group">
+     <div class="input-group-addon">
+      <i class="fa fa-commenting" style="font-size: 20px;"></i>
     </div>
-
-
+    <input id="ness" name="descricao" type="text" placeholder="Descrição" class="form-control input-md" disabled>
+    <input id="ness1" name="observacao" type="text" placeholder="Observação" class="form-control input-md" disabled>
+  </div>
+</div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"> Permanente</br>
+    <label class="radio-inline">
+      <input id="ness2" type="radio" name="permanente" value="1"disabled>
+      Sim
+    </label>
+  </div> 
+</br>
+<div class="col-md-4"> 
+  <label class="radio-inline">
+    <input id="ness3" type="radio" name="permanente" value="2"  checked="checked"disabled>
+    Não
+  </label> 
+</div>
+</div>
 
 <!-- Submit form -->
 <div class="form-group">
   <label class="col-md-4 control-label" ></label>  
   <div class="col-md-4">
-    <a href="#" class="btn btn-success"><span class="fa fa-check"></span> Enviar</a>
+    <a href="/profiles" class="btn btn-success"><span class="fa fa-check"></span> Enviar</a>
     <a href="#" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
-
   </div>
 </div>
 
@@ -321,7 +325,17 @@
 
 <script type="text/javascript">
   function habilitar(){
-    document.setElementById('ness').enabled = true;
+    document.getElementById("ness").disabled = false;
+    document.getElementById("ness1").disabled = false;
+    document.getElementById("ness2").disabled = false;
+    document.getElementById("ness3").disabled = false;
+  }
+
+  function desabilitar(){
+    document.getElementById("ness").disabled = true;
+    document.getElementById("ness1").disabled = true;
+    document.getElementById("ness2").disabled = true;
+    document.getElementById("ness3").disabled = true;
   }
   
 </script>
