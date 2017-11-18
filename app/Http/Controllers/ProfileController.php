@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Profile;
+use App\Models\Profile as Profile;
 
 class ProfileController extends Controller
 {
@@ -37,11 +37,37 @@ class ProfileController extends Controller
     {
         $profile = $this->validate(request(), [
           'nome' => 'required',
+          'data_nascimento'  => 'required',
+          'rg' => 'required',
+          'emissor_rg' => 'required',
+          'cpf' => 'required',
+          'sexo' => 'required',
+          'nome_pai' => 'required',
+          'nome_mae' => 'required',
+          'passaporte' => 'required',
+          'naturalidade' => 'required',
+          'telfone' => 'required',
+          'celular' => 'required',
+          'escolaridade' => 'required',
           ]);
 
-       Product::create($product);
+        $address = $this->validate(request(), [
+            'profile_id' => 'required',
+            'rua' => 'required',
+            'numero' => 'required',
+            'cep' => 'required',
+            'bairro' => 'required',
+            'complemento' => 'required',
+            'tipo' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'pais' => 'required',
+          ]);
 
-       return redirect('products')->with('message', 'Produto Adicionado!');
+        Profile::create($profile);
+        Address::create($address);
+
+        return  0;
     }
 
     /**

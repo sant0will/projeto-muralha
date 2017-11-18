@@ -170,7 +170,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
   <div class="col-md-4  col-xs-4">
-    <input id="Permanent Address" name="Rua" type="text" placeholder="Rua" class="form-control input-md ">
+    <input id="Permanent Address" name="rua" type="text" placeholder="Rua" class="form-control input-md ">
   </div>
   <div class="col-md-2 col-xs-4">
     <input id="Permanent Address" name="numero" type="text" placeholder="Numero" class="form-control input-md ">
