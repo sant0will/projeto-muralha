@@ -19,10 +19,15 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<form class="form-horizontal" method="post" action="{{url('/profile')}}">
+				<form class="form-horizontal" method="post" action="{{url('profile')}}">
+					{{csrf_field()}}
 					<div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
 					<fieldset>
-
+						@if(session()->has('message'))
+						<div class="alert alert-success">
+							{{ session()->get('message') }}
+						</div>
+						@endif
 						<!--Nome-->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="Name (Full name)">Nome Completo</label>  
@@ -45,7 +50,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-birthday-cake"></i>
 									</div>
-									<input id="Date Of Birth" name="date" required="required" \type="date" placeholder="Data de Nascimento" class="form-control input-md">
+									<input id="Date Of Birth" name="date" required="required" type="date" placeholder="Data de Nascimento" class="form-control input-md">
 								</div>
 								<script>
 									$(document).ready(function(){
@@ -303,7 +308,7 @@
 						<label class="col-md-4 control-label" ></label>  
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
-							<a href="#" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
+							<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
 						</div>
 					</div>
 

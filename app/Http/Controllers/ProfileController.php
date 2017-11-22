@@ -37,9 +37,8 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
 
-        $profile = new Profile([
+        $profile = new Profile($this->validate(request(),[
           'nome' => 'required',
-          'data_nascimento'  => 'required',
           'rg' => 'required',
           'emissor_rg' => 'required',
           'cpf' => 'required',
@@ -50,10 +49,10 @@ class ProfileController extends Controller
           'naturalidade' => 'required',
           'telfone' => 'required',
           'celular' => 'required',
-          'escolaridade' => 'required',
-          ]);
+          'escolaridade' => 'required'
+          ]));
 
-         $address = new Address([
+         $address = new Address($this->validate(request(),[
             'rua' => 'required',
             'numero' => 'required',
             'cep' => 'required',
@@ -63,7 +62,7 @@ class ProfileController extends Controller
             'cidade' => 'required',
             'estado' => 'required',
             'pais' => 'required',
-          ]);
+          ]));
 
 
         $profile->address()->save($address);
