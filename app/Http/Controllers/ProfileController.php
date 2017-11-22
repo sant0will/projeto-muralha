@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile as Profile;
 use App\Models\Address as Address;
+use App\Models\User as User;
+
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +50,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
 
-        $profile = new Profile($this->validate(request(),[
+        $profile = new Profile($request->all(), [
           'nome' => 'required',
           'rg' => 'required',
           'emissor_rg' => 'required',
@@ -50,9 +63,17 @@ class ProfileController extends Controller
           'telfone' => 'required',
           'celular' => 'required',
           'escolaridade' => 'required'
-          ]));
+          ]);
 
-         $address = new Address($this->validate(request(),[
+        $user = Auth::user();
+
+        $profile->user = $user;
+
+
+
+        $user->profiles()->save($profile);
+
+        $address = new Address($request->all(),[
             'rua' => 'required',
             'numero' => 'required',
             'cep' => 'required',
@@ -62,10 +83,18 @@ class ProfileController extends Controller
             'cidade' => 'required',
             'estado' => 'required',
             'pais' => 'required',
-          ]));
+            ]);
 
+        $user->address = $address;
+
+        $post = App\Post::find(1);
+
+        $post->comments()->save($comment);
 
         $profile->address()->save($address);
+
+
+        $profile->save();
 
         return redirect('profile.create')->with('message', 'Usuário Adicionado!');
     }
