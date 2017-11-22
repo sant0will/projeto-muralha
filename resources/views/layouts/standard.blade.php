@@ -25,7 +25,7 @@
             <li class="nav-item dropdown  user-menu">
               <a href="http://example.com" id="navbarDropdownMenuLink">
                 <img src="https://www.adjust.com/new-assets/images/site-images/interface/user.svg" class="user-image " alt="User Image" >
-                <span class="hidden-xs" style="color: #000;">{{ Auth::user()->name }}</span>
+                <span class="hidden-xs" style="color: #e6f2ff;">{{ Auth::user()->name }}</span>
               </a>
             </li>
           </ul>
