@@ -11,4 +11,7 @@ class Profile extends Model{
     public function spcialsneeds(){
         return $this->belongsToMany('App\Models\SpecialNeed');
     }
+    public function users(){
+        return $this->hasOne('App\Models\User');
+    }
 }

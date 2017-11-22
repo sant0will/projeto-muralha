@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile as Profile;
+use App\Models\Address as Address;
 
 class ProfileController extends Controller
 {
@@ -35,7 +36,8 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $profile = $this->validate(request(), [
+
+        $profile = new Profile([
           'nome' => 'required',
           'data_nascimento'  => 'required',
           'rg' => 'required',
@@ -51,8 +53,7 @@ class ProfileController extends Controller
           'escolaridade' => 'required',
           ]);
 
-        $address = $this->validate(request(), [
-            'profile_id' => 'required',
+         $address = new Address([
             'rua' => 'required',
             'numero' => 'required',
             'cep' => 'required',
@@ -64,10 +65,10 @@ class ProfileController extends Controller
             'pais' => 'required',
           ]);
 
-        Profile::create($profile);
-        Address::create($address);
 
-        return  0;
+        $profile->address()->save($address);
+
+        return redirect('profile.create')->with('message', 'Usuário Adicionado!');
     }
 
     /**
