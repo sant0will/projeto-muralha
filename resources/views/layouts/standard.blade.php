@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-4" id="navbarLeft">
           <a href="/home">
-            <img src="https://image.flaticon.com/icons/svg/62/62666.svg " width="40">
+            <img src="https://image.flaticon.com/icons/svg/62/62666.svg" width="40">
             <span id="nomeSite">Muralha</span>
           </a>          
         </div>

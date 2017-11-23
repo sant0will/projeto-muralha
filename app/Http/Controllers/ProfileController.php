@@ -55,7 +55,22 @@ class ProfileController extends Controller
 
         $profile = new Profile();
         $profile->nome = $request->nome;
+<<<<<<< HEAD
 
+=======
+        $profile->data_nascimento = $request->data_nascimento;
+        $profile->rg = $request->rg;
+        $profile->emissor_rg = $request->emissor_rg;
+        $profile->cpf = $request->cpf;
+        $profile->sexo = $request->sexo;
+        $profile->nome_pai = $request->nome_pai;
+        $profile->nome_mae = $request->nome_mae;
+        $profile->passaporte = $request->passaporte;
+        $profile->naturalidade = $request->naturalidade;
+        $profile->telefone = $request->telefone;
+        $profile->celular = $request->celular;
+        $profile->escolaridade = $request->escolaridade;
+>>>>>>> 27281189ff4a09c8f1f1a465321dd978f1dcb870
 
         // Vinculando perfil ao usuário logado
         $user = Auth::user();

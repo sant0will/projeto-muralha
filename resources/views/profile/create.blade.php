@@ -50,7 +50,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-birthday-cake"></i>
 									</div>
-									<input id="Date Of Birth" name="date" required="required" type="date" placeholder="Data de Nascimento" class="form-control input-md">
+									<input id="Date Of Birth" name="data_nascimento" required="required" type="date" placeholder="Data de Nascimento" class="form-control input-md">
 								</div>
 								<script>
 									$(document).ready(function(){
@@ -98,15 +98,15 @@
 						<label class="col-md-4 control-label" for="Gender">Genêro</label>
 						<div class="col-md-6"> 
 							<label class="radio-inline" for="Gender-0">
-								<input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+								<input type="radio" name="sexo" id="Gender-0" value="1" checked="checked">
 								Masculino
 							</label> 
 							<label class="radio-inline" for="Gender-1">
-								<input type="radio" name="Gender" id="Gender-1" value="2">
+								<input type="radio" name="sexo" id="Gender-1" value="2">
 								Feminino
 							</label> 
 							<label class="radio-inline" for="Gender-2">
-								<input type="radio" name="Gender" id="Gender-2" value="3">
+								<input type="radio" name="sexo" id="Gender-2" value="3">
 								Outro
 							</label>
 						</div>
@@ -159,7 +159,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-book" style="font-size: 20px;"></i>
 								</div>
-								<input name="passporte" type="text" placeholder="Passaporte" class="form-control input-md">
+								<input name="passaporte" type="text" placeholder="Passaporte" class="form-control input-md">
 							</div>
 						</div>
 					</div>
@@ -217,11 +217,11 @@
 						<label class="col-md-4 control-label" for="tipo_endereco"> Tipo de Endereço</label>
 						<div class="col-md-4"> 
 							<label class="radio-inline" for="tipo_endereco-0">
-								<input type="radio" name="tipo_endereco" id="tipo_endereco-0" value="1" checked="checked">
+								<input type="radio" name="tipo" id="tipo_endereco-0" value="1" checked="checked">
 								Residencial
 							</label> 
 							<label class="radio-inline" for="tipo_endereco-1">
-								<input type="radio" name="tipo_endereco" id="tipo_endereco-1" value="2">
+								<input type="radio" name="tipo" id="tipo_endereco-1" value="2">
 								Comercial
 							</label> 
 						</div>
