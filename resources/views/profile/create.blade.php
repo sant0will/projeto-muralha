@@ -190,6 +190,9 @@
 						<div class="col-md-3  col-xs-4">
 							<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md ">
 						</div>
+						<div class="col-md-3  col-xs-4">
+							<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md ">
+						</div>
 					</div>
 
 					<div class="form-group">

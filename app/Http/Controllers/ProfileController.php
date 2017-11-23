@@ -57,7 +57,6 @@ class ProfileController extends Controller
         $profile->nome = $request->nome;
 
 
-
         // Vinculando perfil ao usuário logado
         $user = Auth::user();
         $profile->user_id = $user->id;
