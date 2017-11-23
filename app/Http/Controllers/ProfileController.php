@@ -51,13 +51,9 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->request);
-
+        //Atribuição do form para o model Profile
         $profile = new Profile();
         $profile->nome = $request->nome;
-<<<<<<< HEAD
-
-=======
         $profile->data_nascimento = $request->data_nascimento;
         $profile->rg = $request->rg;
         $profile->emissor_rg = $request->emissor_rg;
@@ -70,21 +66,33 @@ class ProfileController extends Controller
         $profile->telefone = $request->telefone;
         $profile->celular = $request->celular;
         $profile->escolaridade = $request->escolaridade;
->>>>>>> 27281189ff4a09c8f1f1a465321dd978f1dcb870
 
         // Vinculando perfil ao usuário logado
         $user = Auth::user();
         $profile->user_id = $user->id;
 
-
-
         if ($profile->save()) {
-            return redirect('profile.create')->with('message', 'Usuário Adicionado!');
+            //Atribuição do form para o model Address
+            $address = new Address();
+            $address->rua = $request->rua;
+            $address->numero = $request->numero;
+            $address->cep = $request->cep;
+            $address->bairro = $request->bairro;
+            $address->complemento = $request->complemento;
+            $address->tipo = $request->tipo;
+            $address->cidade = $request->cidade;
+            $address->estado = $request->estado;
+            $address->pais = $request->pais;
+
+            // Vinculando perfil ao endereço logado
+            $profile = Profile::find(1);
+            $address->profile_id = $profile->id;
+
+            return redirect('profile/create')->with('message', 'Usuário Adicionado!');
+
         } else {
-            return redirect('profile.create')->with('message', 'Algum problema aconteceu!');
-        }
-        
-        
+            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
+        }   
     }
 
     /**
