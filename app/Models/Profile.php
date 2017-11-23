@@ -16,18 +16,21 @@ class Profile extends Model{
 	'nome_mae',
 	'passaporte',
 	'naturalidade',
-	'telfone',
+	'telefone',
 	'celular',
 	'escolaridade'
 	];
 
+	public function user(){
+		return $this->belongsTo('App\Models\User');
+	}
+
 	public function address(){
 		return $this->hasOne('App\Models\Address');
 	}
+
 	public function specialneeds(){
 		return $this->belongsToMany('App\Models\SpecialNeed');
 	}
-	public function user(){
-		return $this->hasOne('App\Models\User');
-	}
+	
 }

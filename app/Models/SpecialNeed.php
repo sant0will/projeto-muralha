@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpecialNeed extends Model{
     public function profiles(){
-        return $this->belongsToMany('App\Models\Profiles')->withPivot('permanente','observacao');
+        return $this->belongsToMany('App\Models\Profile')->withPivot('permanente','observacao');
     }
 }

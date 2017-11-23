@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Profile as Profile;
 use App\Models\Address as Address;
@@ -50,53 +51,26 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
 
-        $profile = new Profile($request->all(), [
-          'nome' => 'required',
-          'rg' => 'required',
-          'emissor_rg' => 'required',
-          'cpf' => 'required',
-          'sexo' => 'required',
-          'nome_pai' => 'required',
-          'nome_mae' => 'required',
-          'passaporte' => 'required',
-          'naturalidade' => 'required',
-          'telfone' => 'required',
-          'celular' => 'required',
-          'escolaridade' => 'required'
-          ]);
+        dd($request->request);
 
+        $profile = new Profile();
+        $profile->nome = $request->nome;
+
+
+
+        // Vinculando perfil ao usuário logado
         $user = Auth::user();
-
-        $profile->user = $user;
-
+        $profile->user_id = $user->id;
 
 
-        $user->profiles()->save($profile);
 
-        $address = new Address($request->all(),[
-            'rua' => 'required',
-            'numero' => 'required',
-            'cep' => 'required',
-            'bairro' => 'required',
-            'complemento' => 'required',
-            'tipo' => 'required',
-            'cidade' => 'required',
-            'estado' => 'required',
-            'pais' => 'required',
-            ]);
-
-        $user->address = $address;
-
-        $post = App\Post::find(1);
-
-        $post->comments()->save($comment);
-
-        $profile->address()->save($address);
-
-
-        $profile->save();
-
-        return redirect('profile.create')->with('message', 'Usuário Adicionado!');
+        if ($profile->save()) {
+            return redirect('profile.create')->with('message', 'Usuário Adicionado!');
+        } else {
+            return redirect('profile.create')->with('message', 'Algum problema aconteceu!');
+        }
+        
+        
     }
 
     /**

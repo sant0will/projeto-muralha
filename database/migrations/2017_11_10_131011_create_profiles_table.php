@@ -27,7 +27,7 @@ class CreateProfilesTable extends Migration
             $table->string('nome_mae', 200);
             $table->string('passaporte', 50);
             $table->string('naturalidade', 50);
-            $table->string('telfone', 45);
+            $table->string('telefone', 45);
             $table->string('celular', 45);
             $table->string('escolaridade', 45);
             $table->timestamps();

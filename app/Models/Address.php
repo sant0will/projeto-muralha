@@ -19,6 +19,6 @@ class Address extends Model{
 	];
 
 	public function profiles(){
-		return $this->hasMany('App\Models\Address');
+		return $this->belongTo('App\Models\Profile');
 	}
 }
