@@ -85,8 +85,9 @@ class ProfileController extends Controller
             $address->pais = $request->pais;
 
             // Vinculando perfil ao endereço logado
-            $profile = Profile::find(1);
+            $profile = Profile::find($profile->id);
             $address->profile_id = $profile->id;
+            $address->save();
 
             return redirect('profile/create')->with('message', 'Usuário Adicionado!');
 
