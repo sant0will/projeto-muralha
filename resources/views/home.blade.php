@@ -5,11 +5,20 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Seja bem Vindo {{ Auth::user()->name }}!</div>
+                <div class="panel-heading"><h3 align="center">Seja bem Vindo {{ Auth::user()->name }}!</h3>
+                    @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                    @endif
 
-                <div class="content"> 
-                <h3>Gostaria de se cadastrar?</h3>
-                <a href="/profile/create" class="btn btn-success">Cadastrar-se</a>
+                    <!--Nome-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Já Completou seu Cadastro? </label>  
+                        <div class="col-md-7">
+                        <a href="profile/create" class="btn btn-success">Cadastro</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

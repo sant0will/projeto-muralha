@@ -23,7 +23,7 @@
         <div class="col-md-8" id="navbarRight">
           <ul class="navbar-nav" id="listaUser">
             <li class="nav-item dropdown  user-menu">
-              <a href="http://example.com" id="navbarDropdownMenuLink">
+              <a href="profile/show" id="navbarDropdownMenuLink">
                 <img src="https://www.adjust.com/new-assets/images/site-images/interface/user.svg" class="user-image " alt="User Image" >
                 <span class="hidden-xs" style="color: #e6f2ff;">{{ Auth::user()->name }}</span>
               </a>
