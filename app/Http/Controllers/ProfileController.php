@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Profile as Profile;
 use App\Models\Address as Address;
 use App\Models\User as User;
+use App\Models\SpecialNeed as SpecialNeed;
+use App\Models\SpecialNeedProfile as SpecialNeedProfile;
 
 
 class ProfileController extends Controller
@@ -50,7 +52,6 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-
         //Atribuição do form para o model Profile
         $profile = new Profile();
         $profile->nome = $request->nome;
@@ -89,11 +90,31 @@ class ProfileController extends Controller
             $address->profile_id = $profile->id;
             $address->save();
 
-            return redirect('profile/create')->with('message', 'Usuário Adicionado!');
+            //Necessidades Especiais
+            if(($request->ness) == 2){
+                return redirect('profile/create')->with('message', 'Usuário Adicionado!');
+            }else{
+                $special_need = new SpecialNeed();
+                $special_need->descricao = $request->descricao;
+                $special_need->save();
 
-        } else {
+                $special_need_profile = new SpecialNeedProfile();
+                $special_need_profile->permanente = $request->permanente;
+                $special_need_profile->observacao = $request->observacao;
+
+                // Vinculando perfil e necessidades especiais
+                $profile = Profile::find($profile->id);
+                $special_need_profile->profile_id = $profile->id;
+                $special_need_profile->special_need_id = $special_need->id;
+                $special_need_profile->save();
+
+                //retorno com mensagm de sucesso ou error
+                return redirect('profile/create')->with('message', 'Usuário Adicionado!');
+
+            }    
+        }else {
             return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
-        }   
+        }
     }
 
     /**
