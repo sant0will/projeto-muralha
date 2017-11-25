@@ -31,7 +31,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile/index');
+        $profiles = Profile::all();
+        return view('profile.index')->with('profiles', $profiles);
     }
 
     /**
@@ -125,8 +126,8 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $profile = Profile::find(1);
-        return redirect('profile/($profile->id)');
+        $profile = Profile::find($id);
+        return view('profile.show',compact('profile','id'));
     }
 
     /**

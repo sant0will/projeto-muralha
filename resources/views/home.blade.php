@@ -11,8 +11,6 @@
                         {{ session()->get('message') }}
                     </div>
                     @endif
-
-                    <!--Nome-->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Já Completou seu Cadastro? </label>  
                         <div class="col-md-7">
