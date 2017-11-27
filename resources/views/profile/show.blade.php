@@ -23,12 +23,7 @@
                                         <dt>ID</dt>
                                         <dd> {{$profile->id}}</dd>
                                         <dt>Nome</dt>
-                                        <dd> {{$profile->nome}}</dd>
-                                        <dt>Valor</dt>
-                                        <dd> {{$profile->valor}} </dd>
-                                        <dt>Categoria</dt>
-                                        <dd> {{$profile->categoria}}</dd>     
-                                    </dl>
+                                        <dd> {{$profile->nome}}</dd> 
 
                                 </div>
                             </div>
