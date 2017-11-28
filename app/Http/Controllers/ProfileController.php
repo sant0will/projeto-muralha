@@ -132,13 +132,13 @@ class ProfileController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    }
+}
 
-    public function edit($id)
-    {
-        $profile = Profile::find($id);
-        return view('profile.edit')->with('profile', $profile);
-    }
+public function edit($id)
+{
+    $profile = Profile::find($id);
+    return view('profile.edit')->with('profile', $profile);
+}
 
     /**
      * Update the specified resource in storage.
@@ -214,6 +214,12 @@ class ProfileController extends Controller{
      */
     public function destroy($id)
     {
-        //
+
+        $profile = Profile::find($id);
+        if ($profile->delete()) {
+            return redirect('profile/create')->with('message', 'Usuário Deletado!');   
+        }else {
+            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
+        }
     }
 }
