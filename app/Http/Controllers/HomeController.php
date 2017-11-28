@@ -27,5 +27,6 @@ class HomeController extends Controller
     {
         $profiles = Profile::all();
         return view('home')->with('profiles', $profiles);
+        render('layouts.standard')->with('profiles', $profiles);
     }
 }

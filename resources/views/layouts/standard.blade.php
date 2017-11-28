@@ -32,35 +32,27 @@
       </div>
     </naxv>
   </header>
-  <div class="main">
+  <div class="main"> 
     <aside>
       <div class="left w3-collapse w3-card w3-animate-left">
         <div class="item">
           <span class="fa fa-plus-square fafa fa-lg"></span><a href="/profile/create">Cadastro</a>
         </div>
         <div class="item">             
-          <span class="fa fa-user-o fafa fa-lg"><a href="#" data-toggle="collapse" data-target="#demo">Perfil</a>
+        <span class="fa fa-user-o fafa fa-lg"></span><a href="/profile/2">Perfil</a>
           </div>
-          <div id="demo" class="collapse item">
-            <div class="item">             
-              <span class="fa fa-user-o fafa fa-lg"><a href="#" >Mostrar</a>
-            </div>
-            <div class="item">             
-              <span class="fa fa-user-o fafa fa-lg"><a href="#">Editar</a>
-            </div>
+          <div class="item">
+            <span class="fa fa-calendar fafa fa-lg"></span><a href="#">Processos Seletivos</a>
           </div>
-              <div class="item">
-                <span class="fa fa-calendar fafa fa-lg"></span><a href="#">Processos Seletivos</a>
-              </div>
-              <div class="item">
-                <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">Sair</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                </form>
-              </div>    
-            </div>
-          </aside>
+          <div class="item">
+            <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">Sair</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+          </div>    
         </div>
-        @yield('content')
-      </body>
+      </aside>          
+    </div>
+    @yield('content')
+  </body>

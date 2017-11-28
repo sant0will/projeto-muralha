@@ -11,8 +11,7 @@ use App\Models\SpecialNeed as SpecialNeed;
 use App\Models\SpecialNeedProfile as SpecialNeedProfile;
 
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller{
 
     /**
      * Create a new controller instance.
@@ -31,7 +30,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
+        $profiles = Profile::find();
         return view('profile.index')->with('profiles', $profiles);
     }
 
@@ -93,7 +92,7 @@ class ProfileController extends Controller
 
             //Necessidades Especiais
             if(($request->ness) == 2){
-                return redirect('profile/create')->with('message', 'Usuário Adicionado!');
+                return redirect('profile/create')->with('message', 'Usuário Adicionado!'); 
             }else{
                 $special_need = new SpecialNeed();
                 $special_need->descricao = $request->descricao;
@@ -111,7 +110,6 @@ class ProfileController extends Controller
 
                 //retorno com mensagm de sucesso ou error
                 return redirect('profile/create')->with('message', 'Usuário Adicionado!');
-
             }    
         }else {
             return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
@@ -124,11 +122,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){        
         $profile = Profile::find($id);
-        return view('profile.show',compact('profile','id'));
-    }
+        return view('profile.show')->with('profile', $profile);
 
     /**
      * Show the form for editing the specified resource.
@@ -136,6 +132,8 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    }
+
     public function edit($id)
     {
         //
