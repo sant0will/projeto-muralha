@@ -19,7 +19,7 @@ class CreateSpecialNeedProfilesTable extends Migration
             $table->integer('special_need_id')->unsigned();
             $table->foreign('special_need_id')->references('id')->on('special_needs');
             $table->tinyInteger('permanente', 100);
-            $table->string('observacao', 500);
+            $table->string('observacao', 500)->nullable();
             $table->timestamps();
         });
     }

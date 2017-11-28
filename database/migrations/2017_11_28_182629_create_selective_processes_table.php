@@ -16,7 +16,7 @@ class CreateSelectiveProcessesTable extends Migration
         Schema::create('selective_processes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('descricao');
+            $table->string('descricao')->nullable();
             $table->dateTime('data_inicio');
             $table->dateTime('data_fim');
             $table->tinyInteger('ativo');
