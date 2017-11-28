@@ -136,7 +136,8 @@ class ProfileController extends Controller{
 
     public function edit($id)
     {
-        //
+        $profile = Profile::find($id);
+        return view('profile.edit')->with('profile', $profile);
     }
 
     /**
@@ -148,7 +149,61 @@ class ProfileController extends Controller{
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::find($id);
+        $profile->nome = $request->nome;
+        $profile->data_nascimento = $request->data_nascimento;
+        $profile->rg = $request->rg;
+        $profile->emissor_rg = $request->emissor_rg;
+        $profile->cpf = $request->cpf;
+        $profile->sexo = $request->sexo;
+        $profile->nome_pai = $request->nome_pai;
+        $profile->nome_mae = $request->nome_mae;
+        $profile->passaporte = $request->passaporte;
+        $profile->naturalidade = $request->naturalidade;
+        $profile->telefone = $request->telefone;
+        $profile->celular = $request->celular;
+        $profile->escolaridade = $request->escolaridade;
+
+        if ($profile->save()) {
+            //Atribuição do form para o model Address
+            $profile = Profile::find($profile->id);
+            $address = Address::find($profile->id);
+            $address->rua = $request->rua;
+            $address->numero = $request->numero;
+            $address->cep = $request->cep;
+            $address->bairro = $request->bairro;
+            $address->complemento = $request->complemento;
+            $address->tipo = $request->tipo;
+            $address->cidade = $request->cidade;
+            $address->estado = $request->estado;
+            $address->pais = $request->pais;
+            $address->save();
+
+            //Necessidades Especiais
+            if(($request->ness) == 2){
+                return redirect('profile/create')->with('message', 'Usuário Alterado!'); 
+            }else{
+                $profile = Profile::find($profile->id);
+                $special_need = SpecialNeed::find();
+                $special_need->descricao = $request->descricao;
+                $special_need->save();
+
+                $special_need_profile = SpecialNeedProfile::find($profile->id);
+                $special_need_profile->permanente = $request->permanente;
+                $special_need_profile->observacao = $request->observacao;
+
+                // Vinculando perfil e necessidades especiais
+                $special_need_profile->profile_id = $profile->id;
+                $special_need_profile->special_need_id = $special_need->id;
+                $special_need_profile->save();
+
+                //retorno com mensagm de sucesso ou error
+                return redirect('profile/create')->with('message', 'Usuário Alterado!');
+            }    
+        }else {
+            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
+        }
+
     }
 
     /**
