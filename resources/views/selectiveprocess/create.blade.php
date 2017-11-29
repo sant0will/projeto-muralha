@@ -30,14 +30,27 @@
 						@endif
 						<!--Nome-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="Name (Full name)">Nome Processo</label>  
+							<label class="col-md-4 control-label" for="Name (Full name)">Processo Seletivo</label>  
 							<div class="col-md-7">
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user">
 										</i>
 									</div>
-									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome Completo" class="form-control input-md">
+									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome do Processo" class="form-control input-md">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Descrição</label>  
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user">
+										</i>
+									</div>
+									<input id="descricao" name="descricao" required="required" type="text" placeholder="Descrição" class="form-control input-md">
 								</div>
 							</div>
 						</div>
@@ -67,244 +80,6 @@
 						</div>
 					</div>
 
-					<!-- Nome Pai -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Father">Nome do Pai</label>  
-						<div class="col-md-7">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-male" style="font-size: 20px;"></i>
-								</div>
-								<input id="Father" name="nome_pai" type="text" required="required" placeholder="Nome do Pai" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Nome mãe -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Mother">Nome da Mãe</label>  
-						<div class="col-md-7">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-female" style="font-size: 20px;"></i>
-								</div>
-								<input id="Mother" name="nome_mae" type="text" required="required" placeholder="Nome da Mãe" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Genero -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Gender">Genêro</label>
-						<div class="col-md-6"> 
-							<label class="radio-inline" for="Gender-0">
-								<input type="radio" name="sexo" id="Gender-0" value="1" checked="checked">
-								Masculino
-							</label> 
-							<label class="radio-inline" for="Gender-1">
-								<input type="radio" name="sexo" id="Gender-1" value="2">
-								Feminino
-							</label> 
-							<label class="radio-inline" for="Gender-2">
-								<input type="radio" name="sexo" id="Gender-2" value="3">
-								Outro
-							</label>
-						</div>
-					</div>
-
-					<!-- RG -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">RG</label>  
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-id-card-o" style="font-size: 20px;"></i>
-								</div>
-								<input name="rg" required="required" type="text" placeholder="RG" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Emissor RG -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Emissor RG</label>  
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-id-card-o" style="font-size: 20px;"></i>
-								</div>
-								<input name="emissor_rg" required="required" type="text" placeholder="Emissor RG" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- CPF -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">CPF</label>  
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-id-card" style="font-size: 20px;"></i>
-								</div>
-								<input name="cpf" required="required" type="text" placeholder="CPF" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Passaporte -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Passaporte</label>  
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-book" style="font-size: 20px;"></i>
-								</div>
-								<input name="passaporte" type="text" placeholder="Passaporte" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Endereço -->
-					<div class="form-group">
-						<label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
-						<div class="col-md-4  col-xs-4">
-							<input id="Permanent Address" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md ">
-						</div>
-						<div class="col-md-2 col-xs-4">
-							<input id="Permanent Address" name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md ">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md ">
-						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md ">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md ">
-						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md ">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md ">
-						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="pais" required="required" type="text" placeholder="País" class="form-control input-md ">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-6  col-xs-4">
-							<input id="Permanent Address" name="complemento" type="text" placeholder="Complemento" class="form-control input-md ">
-						</div>
-					</div>
-
-					<!-- Tipo Endereço -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="tipo_endereco"> Tipo de Endereço</label>
-						<div class="col-md-4"> 
-							<label class="radio-inline" for="tipo_endereco-0">
-								<input type="radio" name="tipo" id="tipo_endereco-0" value="1" checked="checked">
-								Residencial
-							</label> 
-							<label class="radio-inline" for="tipo_endereco-1">
-								<input type="radio" name="tipo" id="tipo_endereco-1" value="2">
-								Comercial
-							</label> 
-						</div>
-					</div>
-
-					<!-- Escolaridade -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Skills">Escolaridade</label>  
-						<div class="col-md-6">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-graduation-cap"></i>
-								</div>
-								<input id="Skills" name="escolaridade" required="required" type="text" placeholder="Escolaridade" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Telefones -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Phone number ">Numero de Telefone</label>  
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
-								</div>
-								<input id="Phone number " name="telefone" required="required" type="text" placeholder="Telefone Fixo" class="form-control input-md">
-							</div>
-							<div class="input-group othertop">
-								<div class="input-group-addon">
-									<i class="fa fa-mobile fa-1x" style="font-size: 20px;"></i>
-								</div>
-								<input id="Phone number " name="celular" required="required" type="text" placeholder="Telefone Celular" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!-- Necessidades Especiais -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Nessecidades Especiais</label>
-						<div class="col-md-4"> 
-							<label class="radio-inline">
-								<input type="radio" name="ness" value="1" onclick="habilitar()">
-								Sim
-							</label>
-						</div> 
-						<div class="col-md-4"> 
-							<label class="radio-inline">
-								<input type="radio" name="ness" value="2"  checked="checked" onclick="desabilitar()">
-								Não
-							</label> 
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label"></label>  
-						<div class="col-md-6">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-commenting" style="font-size: 20px;"></i>
-								</div>
-								<input id="ness" name="descricao" required="required" type="text" placeholder="Descrição" class="form-control input-md" disabled>
-								<input id="ness1" name="observacao" required="required" type="text" placeholder="Observação" class="form-control input-md" disabled>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label"></label>
-						<div class="col-md-4"> Permanente<br>
-							<label class="radio-inline">
-								<input id="ness2" type="radio" name="permanente" value="1"disabled>
-								Sim
-							</label>
-						</div> 
-						<br>
-						<div class="col-md-4"> 
-							<label class="radio-inline">
-								<input id="ness3" type="radio" name="permanente" value="2"  checked="checked"disabled>
-								Não
-							</label> 
-						</div>
-					</div>
 
 					<!-- Submit form -->
 					<div class="form-group">
