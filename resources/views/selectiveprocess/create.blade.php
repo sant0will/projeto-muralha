@@ -28,6 +28,7 @@
 							{{ session()->get('message') }}
 						</div>
 						@endif
+
 						<!--Nome-->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="Name (Full name)">Processo Seletivo</label>  
@@ -57,17 +58,17 @@
 
 						<!-- Data -->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="Date Of Birth">Data de Nascimento</label>  
+							<label class="col-md-4 control-label">Data de Inicio</label>  
 							<div class="col-md-7">
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-birthday-cake"></i>
 									</div>
-									<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md">
+									<input  name="data_inicio" required="required" placeholder="Data de Inicio" class="form-control input-md">
 								</div>
 								<script>
 									$(document).ready(function(){
-									var date_input=$('input[name="data_nascimento"]'); //our date input has the name "date"
+									var date_input=$('input[name="data_inicio"]'); //our date input has the name "date"
 									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 									date_input.datepicker({
 										format: 'yyyy-mm-dd',
@@ -80,6 +81,48 @@
 						</div>
 					</div>
 
+					<!-- Data -->
+					<div class="form-group">
+						<label class="col-md-4 control-label">Data de Fim</label>  
+						<div class="col-md-7">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-birthday-cake"></i>
+								</div>
+								<input id="data_fim" name="data_fim" required="required" placeholder="Data do Fim" class="form-control input-md">
+							</div>
+							<script>
+								$(document).ready(function(){
+									var date_input=$('input[name="data_fim"]'); //our date input has the name "date"
+									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+									date_input.datepicker({
+										format: 'yyyy-mm-dd',
+										container: container,
+										todayHighlight: true,
+										autoclose: true,
+									})
+								})
+							</script>
+						</div>
+					</div>
+
+					
+
+					
+
+					<!-- Cursos -->
+					<div class="form-group">
+						<label class="col-md-4 control-label"> Curso </label>  
+						<div class="col-md-4">
+							<select name="cursos" class="form-control col-md-7 col-xs-12">
+							</select>
+						</div>
+					</div>
+
+					
+
+					
+>>>>>>> 0b84d765831783bd68d14ff63d963e1c5beb84ca
 
 					<!-- Submit form -->
 					<div class="form-group">
