@@ -50,14 +50,14 @@
 									<div class="input-group-addon">
 										<i class="fa fa-birthday-cake"></i>
 									</div>
-									<input id="Date Of Birth" name="data_nascimento" required="required" type="date" placeholder="Data de Nascimento" class="form-control input-md">
+									<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md">
 								</div>
 								<script>
 									$(document).ready(function(){
-									var date_input=$('input[name="date"]'); //our date input has the name "date"
+									var date_input=$('input[name="data_nascimento"]'); //our date input has the name "date"
 									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 									date_input.datepicker({
-										format: 'dd/mm/yyyy',
+										format: 'yyyy-mm-dd',
 										container: container,
 										todayHighlight: true,
 										autoclose: true,

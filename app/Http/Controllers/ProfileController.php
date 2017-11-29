@@ -51,13 +51,9 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->request);
 
         $profile = new Profile();
         $profile->nome = $request->nome;
-<<<<<<< HEAD
-
-=======
         $profile->data_nascimento = $request->data_nascimento;
         $profile->rg = $request->rg;
         $profile->emissor_rg = $request->emissor_rg;
@@ -70,7 +66,7 @@ class ProfileController extends Controller
         $profile->telefone = $request->telefone;
         $profile->celular = $request->celular;
         $profile->escolaridade = $request->escolaridade;
->>>>>>> 27281189ff4a09c8f1f1a465321dd978f1dcb870
+
 
         // Vinculando perfil ao usuário logado
         $user = Auth::user();
@@ -79,9 +75,9 @@ class ProfileController extends Controller
 
 
         if ($profile->save()) {
-            return redirect('profile.create')->with('message', 'Usuário Adicionado!');
+            return redirect('profile/create')->with('message', 'Usuário Adicionado!');
         } else {
-            return redirect('profile.create')->with('message', 'Algum problema aconteceu!');
+            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
         }
         
         
