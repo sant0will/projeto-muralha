@@ -42,7 +42,7 @@
         <span class="fa fa-user-o fafa fa-lg"></span><a href="/profile/2">Perfil</a>
           </div>
           <div class="item">
-            <span class="fa fa-calendar fafa fa-lg"></span><a href="#">Processos Seletivos</a>
+            <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess/create">Processos Seletivos</a>
           </div>
           <div class="item">
             <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
