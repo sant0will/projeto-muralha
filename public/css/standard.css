@@ -121,7 +121,20 @@ a:hover{ text-decoration: none; }
 		position: fixed !important;
 		z-index: 1;
 		overflow: auto;
-	}    
+	}   
+
+	#dashboard:hover{
+		height: 20%;
+		width: 250px;
+		background-color: #0059b2;
+		position: fixed !important;
+		z-index: 1;
+		overflow: auto;
+	} 
+
+	.dropdown{
+		list-style: none;
+	}
 
 	.item:hover{
 		background-color:#ccc;
@@ -206,3 +219,10 @@ a:hover{ text-decoration: none; }
 		padding: 15px;	
 	}
 
+	.collapse ul{
+		list-style: none;
+	}
+
+	.collapse ul li{
+		margin: 10px 0;
+	}

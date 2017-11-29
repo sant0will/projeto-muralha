@@ -32,5 +32,9 @@ class Profile extends Model{
 	public function specialneeds(){
 		return $this->belongsToMany('App\Models\SpecialNeed');
 	}
+
+	public function subscriptions(){
+		return $this->hasMany('App\Models\Subscription');
+	}
 	
 }
