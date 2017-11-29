@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<form class="form-horizontal" method="post" action="{{url('profile')}}">
+				<form class="form-horizontal" method="post" action="{{url('selectiveprocess')}}">
 					{{csrf_field()}}
 					<div class="panel-heading"><h3 align="center">Cadastro Processo Seletivo</h3></div>
 					<fieldset>
@@ -31,24 +31,25 @@
 
 						<!--Nome-->
 						<div class="form-group">
-							<label class="col-md-4 control-label" for="Name (Full name)">Processo Seletivo</label>  
+							<label class="col-md-4 control-label">Processo Seletivo</label>  
 							<div class="col-md-7">
 								<div class="input-group">
 									<div class="input-group-addon">
-										<i class="fa fa-user">
+										<i class="fa fa-users">
 										</i>
 									</div>
-									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome do Processo" class="form-control input-md">
+									<input id="nome" name="nome" required="required" type="text" placeholder="Nome do Processo" class="form-control input-md">
 								</div>
 							</div>
 						</div>
 
+						<!--DEscrição-->
 						<div class="form-group">
 							<label class="col-md-4 control-label">Descrição</label>  
 							<div class="col-md-7">
 								<div class="input-group">
 									<div class="input-group-addon">
-										<i class="fa fa-user">
+										<i class="fa fa-quote-right">
 										</i>
 									</div>
 									<input id="descricao" name="descricao" required="required" type="text" placeholder="Descrição" class="form-control input-md">
@@ -62,7 +63,7 @@
 							<div class="col-md-7">
 								<div class="input-group">
 									<div class="input-group-addon">
-										<i class="fa fa-birthday-cake"></i>
+										<i class="fa fa-calendar-check-o"></i>
 									</div>
 									<input  name="data_inicio" required="required" placeholder="Data de Inicio" class="form-control input-md">
 								</div>
@@ -87,7 +88,7 @@
 						<div class="col-md-7">
 							<div class="input-group">
 								<div class="input-group-addon">
-									<i class="fa fa-birthday-cake"></i>
+									<i class="fa fa-calendar-times-o "></i>
 								</div>
 								<input id="data_fim" name="data_fim" required="required" placeholder="Data do Fim" class="form-control input-md">
 							</div>
@@ -106,23 +107,45 @@
 						</div>
 					</div>
 
-					
+					<!--Nome-->
+					<div class="form-group">
+					<label class="col-md-4 control-label">Vagas</label>  
+						<div class="col-md-7">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-list-ol ">
+									</i>
+								</div>
+								<input id="nome" name="vagas" required="required" type="text" placeholder="Numero de vagas" class="form-control input-md">
+							</div>
+						</div>
+					</div>
 
-					
+					<!--Nome-->
+					<div class="form-group">
+					<label class="col-md-4 control-label">Vagas para Cotas</label>  
+						<div class="col-md-7">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-list-ol ">
+									</i>
+								</div>
+								<input id="nome" name="vagas_cotas" required="required" type="text" placeholder="Vagas para Cotas" class="form-control input-md">
+							</div>
+						</div>
+					</div>
 
 					<!-- Cursos -->
 					<div class="form-group">
 						<label class="col-md-4 control-label"> Curso </label>  
 						<div class="col-md-4">
 							<select name="cursos" class="form-control col-md-7 col-xs-12">
+								<?php foreach($courses as $course): ?>
+									<option value="<?= $course->id ?>"><?= $course->nome ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 					</div>
-
-					
-
-					
->>>>>>> 0b84d765831783bd68d14ff63d963e1c5beb84ca
 
 					<!-- Submit form -->
 					<div class="form-group">

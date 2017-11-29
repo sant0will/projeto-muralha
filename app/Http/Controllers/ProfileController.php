@@ -30,7 +30,7 @@ class ProfileController extends Controller{
      */
     public function index()
     {
-        $profiles = Profile::find();
+        $profiles = Profile::all();
         return view('profile.index')->with('profiles', $profiles);
     }
 
@@ -52,13 +52,10 @@ class ProfileController extends Controller{
      */
     public function store(Request $request)
     {
-
-
-
-
         //Atribuição do form para o model Profile
 
         $profile = new Profile();
+        $profile->adm = $request->adm;
         $profile->nome = $request->nome;
         $profile->data_nascimento = $request->data_nascimento;
         $profile->rg = $request->rg;
@@ -73,18 +70,11 @@ class ProfileController extends Controller{
         $profile->celular = $request->celular;
         $profile->escolaridade = $request->escolaridade;
 
-
-
-
-
         // Vinculando perfil ao usuário logado
         $user = Auth::user();
         $profile->user_id = $user->id;
 
         if ($profile->save()) {
-
-            return redirect('profile/create')->with('message', 'Usuário Adicionado!');
-        } else {
 
             //Atribuição do form para o model Address
             $address = new Address();
@@ -105,7 +95,7 @@ class ProfileController extends Controller{
 
             //Necessidades Especiais
             if(($request->ness) == 2){
-                return redirect('profile/create')->with('message', 'Usuário Adicionado!'); 
+                return redirect('home')->with('message', 'Usuário Adicionado!'); 
             }else{
                 $special_need = new SpecialNeed();
                 $special_need->descricao = $request->descricao;
@@ -122,8 +112,11 @@ class ProfileController extends Controller{
                 $special_need_profile->save();
 
                 //retorno com mensagm de sucesso ou error
-                return redirect('profile/create')->with('message', 'Usuário Adicionado!');
-            }    
+                return redirect('home')->with('message', 'Usuário Adicionado!');
+            }
+        } else {
+            return redirect('home')->with('message', 'Algo deu Errado!');
+            
         }
     }
 
@@ -135,21 +128,20 @@ class ProfileController extends Controller{
      */
     public function show($id){        
         $profile = Profile::find($id);
-        return view('profile.show')->with('profile', $profile);
-
+        return view('profile.show',compact('profile','id'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-}
+    
 
-public function edit($id)
-{
-    $profile = Profile::find($id);
-    return view('profile.edit')->with('profile', $profile);
-}
+    public function edit($id){
+        $profile = Profile::find($id);
+        return view('profile.edit')->with('profile', $profile);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -160,7 +152,8 @@ public function edit($id)
      */
     public function update(Request $request, $id)
     {
-        $profile = Profile::find($id);
+        $profile = Profile::find($id);        
+        $profile->adm = $request->adm;
         $profile->nome = $request->nome;
         $profile->data_nascimento = $request->data_nascimento;
         $profile->rg = $request->rg;
@@ -177,8 +170,7 @@ public function edit($id)
 
         if ($profile->save()) {
             //Atribuição do form para o model Address
-            $profile = Profile::find($profile->id);
-            $address = Address::find($profile->id);
+            $address = Address::find($id);
             $address->rua = $request->rua;
             $address->numero = $request->numero;
             $address->cep = $request->cep;
@@ -192,14 +184,14 @@ public function edit($id)
 
             //Necessidades Especiais
             if(($request->ness) == 2){
-                return redirect('profile/create')->with('message', 'Usuário Alterado!'); 
+                return redirect('home')->with('message', 'Usuário Alterado!'); 
             }else{
-                $profile = Profile::find($profile->id);
+                $profile = Profile::find($id);
                 $special_need = SpecialNeed::find();
                 $special_need->descricao = $request->descricao;
                 $special_need->save();
 
-                $special_need_profile = SpecialNeedProfile::find($profile->id);
+                $special_need_profile = SpecialNeedProfile::find($id);
                 $special_need_profile->permanente = $request->permanente;
                 $special_need_profile->observacao = $request->observacao;
 
@@ -209,28 +201,10 @@ public function edit($id)
                 $special_need_profile->save();
 
                 //retorno com mensagm de sucesso ou error
-                return redirect('profile/create')->with('message', 'Usuário Alterado!');
+                return redirect('home')->with('message', 'Usuário Alterado!');
             }    
         }else {
-            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
+            return redirect('home')->with('message', 'Algum problema aconteceu!');
         }
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
-        $profile = Profile::find($id);
-        if ($profile->delete()) {
-            return redirect('profile/create')->with('message', 'Usuário Deletado!');   
-        }else {
-            return redirect('profile/create')->with('message', 'Algum problema aconteceu!');
-        }
-    }
+    }  
 }

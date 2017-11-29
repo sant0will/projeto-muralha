@@ -25,8 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
-        return view('home')->with('profiles', $profiles);
-        render('layouts.standard')->with('profiles', $profiles);
+        return view('home');
     }
 }

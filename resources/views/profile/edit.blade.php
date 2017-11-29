@@ -19,8 +19,10 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<form class="form-horizontal" method="post" action="{{url('profile')}}">
-					{{csrf_field()}}
+				<form class="form-horizontal" method="post" 
+                  action="{{action('ProfileController@update', Auth::user()->profile->id)}}">
+                  {{csrf_field()}}
+                  <input name="_method" type="hidden" value="PATCH">
 					<div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
 					<fieldset>
 						@if(session()->has('message'))
@@ -55,7 +57,7 @@
 										<i class="fa fa-user">
 										</i>
 									</div>
-									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome Completo" class="form-control input-md">
+									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome Completo" class="form-control input-md" value="{{$profile->nome}}">
 								</div>
 							</div>
 						</div>
@@ -68,7 +70,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-birthday-cake"></i>
 									</div>
-									<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md">
+									<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md" value="{{$profile->data_nascimento}}">
 								</div>
 								<script>
 									$(document).ready(function(){
@@ -93,7 +95,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-male" style="font-size: 20px;"></i>
 								</div>
-								<input id="Father" name="nome_pai" type="text" required="required" placeholder="Nome do Pai" class="form-control input-md">
+								<input id="Father" name="nome_pai" type="text" required="required" placeholder="Nome do Pai" class="form-control input-md" value="{{$profile->nome_pai}}">
 							</div>
 						</div>
 					</div>
@@ -106,7 +108,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-female" style="font-size: 20px;"></i>
 								</div>
-								<input id="Mother" name="nome_mae" type="text" required="required" placeholder="Nome da Mãe" class="form-control input-md">
+								<input id="Mother" name="nome_mae" type="text" required="required" placeholder="Nome da Mãe" class="form-control input-md" value="{{$profile->nome_mae}}">
 							</div>
 						</div>
 					</div>
@@ -138,7 +140,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-id-card-o" style="font-size: 20px;"></i>
 								</div>
-								<input name="rg" required="required" type="text" placeholder="RG" class="form-control input-md">
+								<input name="rg" required="required" type="text" placeholder="RG" class="form-control input-md" value="{{$profile->rg}}">
 							</div>
 						</div>
 					</div>
@@ -151,7 +153,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-id-card-o" style="font-size: 20px;"></i>
 								</div>
-								<input name="emissor_rg" required="required" type="text" placeholder="Emissor RG" class="form-control input-md">
+								<input name="emissor_rg" required="required" type="text" placeholder="Emissor RG" class="form-control input-md" value="{{$profile->emissor_rg}}">
 							</div>
 						</div>
 					</div>
@@ -164,7 +166,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-id-card" style="font-size: 20px;"></i>
 								</div>
-								<input name="cpf" required="required" type="text" placeholder="CPF" class="form-control input-md">
+								<input name="cpf" required="required" type="text" placeholder="CPF" class="form-control input-md" value="{{$profile->cpf}}">
 							</div>
 						</div>
 					</div>
@@ -177,7 +179,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-book" style="font-size: 20px;"></i>
 								</div>
-								<input name="passaporte" type="text" placeholder="Passaporte" class="form-control input-md">
+								<input name="passaporte" type="text" placeholder="Passaporte" class="form-control input-md" value="{{$profile->passaporte}}">
 							</div>
 						</div>
 					</div>
@@ -186,47 +188,47 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
 						<div class="col-md-4  col-xs-4">
-							<input id="Permanent Address" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md ">
+							<input id="Permanent Address" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md " value="{{$profile->address->rua}}">
 						</div>
 						<div class="col-md-2 col-xs-4">
-							<input id="Permanent Address" name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md ">
+							<input id="Permanent Address" name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md " value="{{$profile->address->numero}}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="Permanent Address"></label>  
 						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md ">
+							<input id="Permanent Address" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md " value="{{$profile->address->bairro}}">
 						</div>
 						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md ">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md ">
-						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md ">
+							<input id="Permanent Address" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md " value="{{$profile->address->cidade}}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="Permanent Address"></label>  
 						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md ">
+							<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md " value="{{$profile->address->cep}}">
 						</div>
 						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="pais" required="required" type="text" placeholder="País" class="form-control input-md ">
+							<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md " value="{{$profile->naturalidade}}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="Permanent Address"></label>  
+						<div class="col-md-3  col-xs-4">
+							<input id="Permanent Address" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md " value="{{$profile->address->estado}}">
+						</div>
+						<div class="col-md-3  col-xs-4">
+							<input id="Permanent Address" name="pais" required="required" type="text" placeholder="País" class="form-control input-md " value="{{$profile->address->pais}}">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="Permanent Address"></label>  
 						<div class="col-md-6  col-xs-4">
-							<input id="Permanent Address" name="complemento" type="text" placeholder="Complemento" class="form-control input-md ">
+							<input id="Permanent Address" name="complemento" type="text" placeholder="Complemento" class="form-control input-md " value="{{$profile->address->complemento}}">
 						</div>
 					</div>
 
@@ -253,7 +255,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-graduation-cap"></i>
 								</div>
-								<input id="Skills" name="escolaridade" required="required" type="text" placeholder="Escolaridade" class="form-control input-md">
+								<input id="Skills" name="escolaridade" required="required" type="text" placeholder="Escolaridade" class="form-control input-md" value="{{$profile->escolaridade}}">
 							</div>
 						</div>
 					</div>
@@ -266,13 +268,13 @@
 								<div class="input-group-addon">
 									<i class="fa fa-phone"></i>
 								</div>
-								<input id="Phone number " name="telefone" required="required" type="text" placeholder="Telefone Fixo" class="form-control input-md">
+								<input id="Phone number " name="telefone" required="required" type="text" placeholder="Telefone Fixo" class="form-control input-md" value="{{$profile->telefone}}">
 							</div>
 							<div class="input-group othertop">
 								<div class="input-group-addon">
 									<i class="fa fa-mobile fa-1x" style="font-size: 20px;"></i>
 								</div>
-								<input id="Phone number " name="celular" required="required" type="text" placeholder="Telefone Celular" class="form-control input-md">
+								<input id="Phone number " name="celular" required="required" type="text" placeholder="Telefone Celular" class="form-control input-md" value="{{$profile->celular}}">
 							</div>
 						</div>
 					</div>

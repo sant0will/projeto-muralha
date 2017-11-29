@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" href="https://image.flaticon.com/icons/svg/62/62666.svg" type="image/jpg" sizes="16x16">
   <title>Muralha</title>  
   <link href="{{ asset('css/standard.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
@@ -35,24 +36,37 @@
   <div class="main"> 
     <aside>
       <div class="left w3-collapse w3-card w3-animate-left">
-        <div class="item">
-          <span class="fa fa-plus-square fafa fa-lg"></span><a href="/profile/create">Cadastro</a>
-        </div>
         <div class="item">             
-        <span class="fa fa-user-o fafa fa-lg"></span><a href="/profile/2">Perfil</a>
-          </div>
-          <div class="item">
-            <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess/create">Processos Seletivos</a>
-          </div>
-          <div class="item">
-            <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">Sair</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              {{ csrf_field() }}
-            </form>
-          </div>    
+          <span class="fa fa-user-o fafa fa-lg"></span>
+
+          @if (Auth::user()->profile)
+          <a href="{{action('ProfileController@show', Auth::user()->profile->id)}}">Perfil</a>
+          @else
+          <a href="/profile/create">Perfil</a>
+          @endif
+
         </div>
-      </aside>          
-    </div>
-    @yield('content')
-  </body>
+        <div class="item">
+          <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess">Processos Seletivos</a>
+        </div>
+        
+        @if ((Auth::user()->profile) != null)
+        @if ((Auth::user()->profile->adm) == 1)
+        <div class="item">
+          <span class="fa fa-user-secret fafa fa-lg"></span><a href="/admin">Parte Administrativa</a>
+        </div>
+        @endif   
+        @endif
+
+        <div class="item">
+          <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">Sair</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+          </form>
+        </div>   
+      </div>
+    </aside>          
+  </div>
+  @yield('content')
+</body>

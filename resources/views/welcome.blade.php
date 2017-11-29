@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="icon" href="https://image.flaticon.com/icons/svg/62/62666.svg" type="image/jpg" sizes="16x16">
         <title>Muralha</title>
 
         <!-- Fonts -->

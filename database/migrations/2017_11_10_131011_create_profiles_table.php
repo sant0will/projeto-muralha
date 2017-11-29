@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->tinyInteger('adm');
             $table->string('nome', 200);
             $table->date('data_nascimento');
             $table->string('rg', 15);
