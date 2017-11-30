@@ -29,8 +29,8 @@ class Profile extends Model{
 		return $this->hasOne('App\Models\Address');
 	}
 
-	public function specialneeds(){
-		return $this->belongsToMany('App\Models\SpecialNeed')->withPivot('permanente','observacao');
+	public function specialNeeds(){
+		return $this->belongsToMany('App\Models\SpecialNeed')->withPivot('permanente','observacao')->withTimestamps();
 	}
 
 	public function subscriptions(){

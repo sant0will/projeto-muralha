@@ -8,7 +8,6 @@ use App\Models\Profile as Profile;
 use App\Models\Address as Address;
 use App\Models\User as User;
 use App\Models\SpecialNeed as SpecialNeed;
-use App\Models\ProfileSpecialNeed as ProfileSpecialNeed;
 
 
 class ProfileController extends Controller{
@@ -97,18 +96,20 @@ class ProfileController extends Controller{
             if(($request->ness) == 2){
                 return redirect('home')->with('message', 'Usuário Adicionado!'); 
             }else{
-                $special_need = new SpecialNeed();
-                $special_need->descricao = $request->descricao;
-                $special_need->save();
+                $dados = [];
 
-                $special_need_profile = new ProfileSpecialNeed();
-                $special_need_profile->permanente = $request->permanente;
-                $special_need_profile->observacao = $request->observacao;
+                $selected_special_needs = $request->special_need_id;
 
-                // Vinculando perfil e necessidades especiais
-                $special_need_profile->profile_id = $profile->id;
-                $special_need_profile->special_need_id = $special_need->id;
-                $special_need_profile->save();
+                foreach ($selected_special_needs as $ssn) {
+
+                    if (array_key_exists('id', $ssn)) {
+                        $dados[$ssn['id']] = ['observacao' => $ssn['observacao'], 
+                                              'permanente' => $ssn['permanente']];
+
+                    }
+                }
+
+                $profile->specialNeeds()->sync($dados);
 
                 //retorno com mensagm de sucesso ou error
                 return redirect('home')->with('message', 'Usuário Adicionado!');
@@ -186,15 +187,20 @@ class ProfileController extends Controller{
             if(($request->ness) == 2){
                 return redirect('home')->with('message', 'Usuário Alterado!'); 
             }else{
+                $dados = [];
 
-                $special_need = SpecialNeed::find($profile->id);
-                $special_need->descricao = $request->descricao;
-                $special_need->save();
+                $selected_special_needs = $request->special_need_id;
 
-                $special_need_profile = ProfileSpecialNeed::find($profile->id);
-                $special_need_profile->permanente = $request->permanente;
-                $special_need_profile->observacao = $request->observacao;
-                $special_need_profile->save();
+                foreach ($selected_special_needs as $ssn) {
+
+                    if (array_key_exists('id', $ssn)) {
+                        $dados[$ssn['id']] = ['observacao' => $ssn['observacao'], 
+                                              'permanente' => $ssn['permanente']];
+
+                    }
+                }
+
+                $profile->specialNeeds()->sync($dados);
 
                 //retorno com mensagm de sucesso ou error
                 return redirect('home')->with('message', 'Usuário Alterado!');

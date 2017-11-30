@@ -13,12 +13,12 @@ class CreateProfileSpecialNeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_special_needs', function (Blueprint $table) {
+        Schema::create('profile_special_need', function (Blueprint $table) {
             $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
             $table->integer('special_need_id')->unsigned();
             $table->foreign('special_need_id')->references('id')->on('special_needs');
-            $table->tinyInteger('permanente', 100);
+            $table->boolean('permanente');
             $table->string('observacao', 500)->nullable();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateProfileSpecialNeedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_special_needs');
+        Schema::dropIfExists('profile_special_need');
     }
 }

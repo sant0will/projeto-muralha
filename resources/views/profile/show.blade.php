@@ -12,7 +12,6 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Exibindo Profile</h2>
                       <div class="clearfix"></div>
                     </div>
                     <div class="row">
@@ -24,6 +23,7 @@
                       <div class="col-md-8 col-sm-8 col-xs-8">
                         <div class="x_content">          
                           <dl class="dl-horizontal">
+                            <hr /><h5>Dados Pessoais </h5>
                             <!-- Dados do Profile -->
                             <dt>ID</dt>
                             <dd> {{$profile->id}}</dd>
@@ -59,6 +59,8 @@
                             <dd> {{$profile->celular}}</dd> 
                             <dt>Escolaridade</dt>
                             <dd> {{$profile->escolaridade}}</dd>
+
+                            <hr /><h5>Endereço </h5>
                             <!-- Dados do Endereço -->
                             <br>
                             <dt>Rua</dt>
@@ -85,6 +87,21 @@
                             <dd> {{$profile->address->estado}}</dd>
                             <dt>País</dt>
                             <dd> {{$profile->address->pais}}</dd>
+
+                            <hr /><h5>Necessidades Especiais</h5>
+                            @foreach($profile->specialneeds as $specialneed)
+                            <br>
+                            <dt>Descrição</dt>
+                            <dd> {{$specialneed->descricao}}</dd>
+                            <dt>Observação</dt>
+                            <dd> {{$specialneed->pivot->observacao}}</dd>
+                            <dt>Permanente</dt>
+                            @if($specialneed->pivot->permanente == 1)
+                            <dd> Sim </dd>
+                            @else
+                            <dd> Não  </dd>
+                            @endif
+                            @endforeach
 
                           </div>
                         </div>
