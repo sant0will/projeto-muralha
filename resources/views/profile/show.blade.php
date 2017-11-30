@@ -73,7 +73,7 @@
                             <dd> {{$profile->address->complemento}}</dd>
 
                             <dt>Tipo</dt>
-                            @if($profile->address->tipo)
+                            @if($profile->address->tipo == 1)
                             <dd> Residencial </dd> 
                             @else
                             <dd> Comercial </dd> 
@@ -84,7 +84,7 @@
                             <dt>Estado</dt>
                             <dd> {{$profile->address->estado}}</dd>
                             <dt>País</dt>
-                            <dd> {{$profile->address->pais}}</dd> 
+                            <dd> {{$profile->address->pais}}</dd>
 
                           </div>
                         </div>

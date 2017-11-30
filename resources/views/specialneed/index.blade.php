@@ -19,35 +19,37 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<form class="form-horizontal" method="post" action="{{url('profile')}}">
+				<form class="form-horizontal" method="post" action="{{url('specialneed')}}">
 					{{csrf_field()}}
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Cursos</label>  
-						<div class="col-md-7">
-							<a href="/course" class="btn btn-success"> Criar</a>
+					<div class="panel-heading"><h3 align="center">Cadastro de Necessidades Especiais</h3></div>
+					<fieldset>
+						@if(session()->has('message'))
+						<div class="alert alert-success">
+							{{ session()->get('message') }}
 						</div>
-					</div>
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Cotas</label>  
-						<div class="col-md-7">
-							<a href="/quota" class="btn btn-success"> Criar</a>
-						</div>
-					</div>
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Processo Seletivo</label>  
-						<div class="col-md-7">
-							<a href="/selectiveprocess/create" class="btn btn-success"> Criar </a>
-						</div>
-					</div>
+						@endif
 
-					<!--Nome-->
+						<!--Nome-->
+						<div class="form-group">
+							<label class="col-md-4 control-label">Necessidades Especiais</label>  
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-blind">
+										</i>
+									</div>
+									<input id="nome" name="descricao" required="required" type="text" placeholder="Nome da Necessidade" class="form-control input-md">
+								</div>
+							</div>
+						</div>
+
+						
+					<!-- Submit form -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">Nessecidade Especial</label>  
-						<div class="col-md-7">
-							<a href="/specialneed" class="btn btn-success"> Criar </a>
+						<label class="col-md-4 control-label" ></label>  
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
+							<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
 						</div>
 					</div>
 

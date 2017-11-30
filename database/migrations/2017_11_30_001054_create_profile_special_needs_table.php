@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecialNeedProfilesTable extends Migration
+class CreateProfileSpecialNeedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSpecialNeedProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('special_need_profiles', function (Blueprint $table) {
+        Schema::create('profile_special_needs', function (Blueprint $table) {
             $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');
             $table->integer('special_need_id')->unsigned();
@@ -31,6 +31,6 @@ class CreateSpecialNeedProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('special_nedd_profiles');
+        Schema::dropIfExists('profile_special_needs');
     }
 }

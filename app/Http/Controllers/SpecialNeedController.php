@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SpecialNeed as SpecialNeed;
 
-class AdminController extends Controller
+class SpecialNeedController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     public function index()
     {
-        return view('admin.index');
+        return view('/specialneed/index');
     }
 
     /**
@@ -26,7 +22,6 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
         //
@@ -40,7 +35,13 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $specialneed = new SpecialNeed();
+        $specialneed->descricao=$request->descricao;
+        if($specialneed->save()){
+            return redirect('specialneed')->with('message', 'Necessidade Especial Cadastrado com sucesso!');
+        }else{
+            return redirect('specialneed')->with('message', 'Algo deu errado!');
+        }
     }
 
     /**

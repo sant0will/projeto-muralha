@@ -8,7 +8,7 @@ use App\Models\Profile as Profile;
 use App\Models\Address as Address;
 use App\Models\User as User;
 use App\Models\SpecialNeed as SpecialNeed;
-use App\Models\SpecialNeedProfile as SpecialNeedProfile;
+use App\Models\ProfileSpecialNeed as ProfileSpecialNeed;
 
 
 class ProfileController extends Controller{
@@ -41,7 +41,8 @@ class ProfileController extends Controller{
      */
     public function create()
     {
-        return view('profile/create');
+        $specialneeds = SpecialNeed::all();
+        return view('profile/create')->with('specialneeds', $specialneeds);
     }
 
     /**
@@ -89,7 +90,6 @@ class ProfileController extends Controller{
             $address->pais = $request->pais;
 
             // Vinculando perfil ao endereço logado
-            $profile = Profile::find($profile->id);
             $address->profile_id = $profile->id;
             $address->save();
 
@@ -101,12 +101,11 @@ class ProfileController extends Controller{
                 $special_need->descricao = $request->descricao;
                 $special_need->save();
 
-                $special_need_profile = new SpecialNeedProfile();
+                $special_need_profile = new ProfileSpecialNeed();
                 $special_need_profile->permanente = $request->permanente;
                 $special_need_profile->observacao = $request->observacao;
 
                 // Vinculando perfil e necessidades especiais
-                $profile = Profile::find($profile->id);
                 $special_need_profile->profile_id = $profile->id;
                 $special_need_profile->special_need_id = $special_need->id;
                 $special_need_profile->save();
@@ -140,7 +139,8 @@ class ProfileController extends Controller{
 
     public function edit($id){
         $profile = Profile::find($id);
-        return view('profile.edit')->with('profile', $profile);
+        $specialneeds = SpecialNeed::all();
+        return view('profile.edit')->with('profile', $profile)->with('specialneeds',$specialneeds);
     }
 
     /**
@@ -186,18 +186,14 @@ class ProfileController extends Controller{
             if(($request->ness) == 2){
                 return redirect('home')->with('message', 'Usuário Alterado!'); 
             }else{
-                $profile = Profile::find($id);
-                $special_need = SpecialNeed::find();
+
+                $special_need = SpecialNeed::find($profile->id);
                 $special_need->descricao = $request->descricao;
                 $special_need->save();
 
-                $special_need_profile = SpecialNeedProfile::find($id);
+                $special_need_profile = ProfileSpecialNeed::find($profile->id);
                 $special_need_profile->permanente = $request->permanente;
                 $special_need_profile->observacao = $request->observacao;
-
-                // Vinculando perfil e necessidades especiais
-                $special_need_profile->profile_id = $profile->id;
-                $special_need_profile->special_need_id = $special_need->id;
                 $special_need_profile->save();
 
                 //retorno com mensagm de sucesso ou error

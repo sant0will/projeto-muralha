@@ -12,6 +12,11 @@ class QuotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         return view('quota.index');
@@ -37,7 +42,6 @@ class QuotaController extends Controller
     {
         $cota = new Quota;
         $cota->descricao=$request->nome;
-        $cota->save();
         if($cota->save()){
             return redirect('quota')->with('message', 'Cota Cadastrado com sucesso!');
         }else{

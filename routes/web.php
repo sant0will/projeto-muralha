@@ -23,3 +23,5 @@ Route::resource('selectiveprocess', 'SelectiveProcessController');
 Route::resource('admin', 'AdminController');
 Route::resource('course', 'CourseController');
 Route::resource('quota', 'QuotaController');
+Route::resource('specialneed', 'SpecialNeedController');
+Route::resource('subscription', 'SubscriptionController');

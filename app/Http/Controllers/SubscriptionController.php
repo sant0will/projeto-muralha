@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Exemption as Exemption;
+use App\Models\Subscription as Subscription;
 
-class AdminController extends Controller
+class SubscriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     public function index()
     {
-        return view('admin.index');
+        //
     }
 
     /**
@@ -26,10 +23,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
-        //
+        return view('/subscription/create');
     }
 
     /**
@@ -40,7 +36,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $isencao = new Exemption;
+        $inscricao = new Subscription;
+        
+        $isencao->motivo=$request->motivo;
+        $isencao->motivo=2;
+        $isencao->save();
+
+        $inscricao->data_inscricao=date();
+        $inscricao->data_pagamento=date();
+        $inscricao->data_pagamento=2;
+
+        if($cota->save()){
+            return redirect('quota')->with('message', 'Cota Cadastrado com sucesso!');
+        }else{
+            return redirect('quota')->with('message', 'Algo deu errado!');
+        }
     }
 
     /**

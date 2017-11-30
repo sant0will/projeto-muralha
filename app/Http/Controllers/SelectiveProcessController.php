@@ -15,6 +15,11 @@ class SelectiveProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $selectiveprocess = SelectiveProcess::all();
@@ -48,16 +53,17 @@ class SelectiveProcessController extends Controller
         $selectiveprocess->ativo=1;
 
         if($selectiveprocess->save()){
-            $cotas = SelectiveProcess::find(1);
-            $selectiveprocess = SelectiveProcess::find($selectiveprocess->id);
+            $cotas = SelectiveProcess::find(1);            
             $quotaselectiveprocess = new QuotaSelectiveProcess();
-            $courseselectiveprocess = new CourseSelectiveProcess();
-            $courseselectiveprocess->vagas=$request->vagas;
             $quotaselectiveprocess->vagas=$request->vagas_cotas;
-            $courseselectiveprocess->processo_seletivo_id=$selectiveprocess->id;
             $quotaselectiveprocess->processo_seletivo_id=$selectiveprocess->id;
+            $quotaselectiveprocess->cota_id=1;
+
+            $selectiveprocess = SelectiveProcess::find($selectiveprocess->id);
+            $courseselectiveprocess = new CourseSelectiveProcess();
+            $courseselectiveprocess->vagas=$request->vagas;            
+            $courseselectiveprocess->processo_seletivo_id=$selectiveprocess->id;
             $courseselectiveprocess->curso_id=$request->cursos;
-            $quotaselectiveprocess->cota_id=$cotas->id;
 
             if($quotaselectiveprocess->save() && $courseselectiveprocess->save()){
                 return redirect('home')->with('message', 'Processo Seletivo Adicionado!');

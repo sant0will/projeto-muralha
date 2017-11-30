@@ -18,7 +18,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles');            
             $table->integer('processo_seletivo_id')->unsigned();
-            $table->foreign('processo_seletivo_id')->references('id')->on('selective_processes');
+            $table->foreign('processo_seletivo_id')->references('id')->on('selective_processes';
             $table->integer('curso_id')->unsigned();
             $table->foreign('curso_id')->references('id')->on('courses');                       
             $table->integer('cota_id')->unsigned();

@@ -20,60 +20,75 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				<form class="form-horizontal" method="post" 
-                  action="{{action('ProfileController@update', Auth::user()->profile->id)}}">
-                  {{csrf_field()}}
-                  <input name="_method" type="hidden" value="PATCH">
-					<div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
-					<fieldset>
-						@if(session()->has('message'))
-						<div class="alert alert-success">
-							{{ session()->get('message') }}
+				action="{{action('ProfileController@update', Auth::user()->profile->id)}}">
+				{{csrf_field()}}
+				<input name="_method" type="hidden" value="PATCH">
+				<div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
+				<fieldset>
+					@if(session()->has('message'))
+					<div class="alert alert-success">
+						{{ session()->get('message') }}
+					</div>
+					@endif
+
+					<!-- Administrador -->
+					<div class="form-group">
+						<label  class="col-md-4 control-label">Administrador</label>
+						@if($profile->adm == 1)
+						<div class="col-md-4"> 
+							<label class="radio-inline">
+								<input type="radio" id="adm" name="adm" value="1" checked="checked">
+								Sim
+							</label>
+						</div> 
+						<div class="col-md-4"> 
+							<label class="radio-inline">
+								<input type="radio" id="adm" name="adm" value="2" >
+								Não
+							</label> 
+						</div>
+						@else
+						<div class="col-md-4"> 
+							<label class="radio-inline">
+								<input type="radio" id="adm" name="adm" value="1">
+								Sim
+							</label>
+						</div> 
+						<div class="col-md-4"> 
+							<label class="radio-inline">
+								<input type="radio" id="adm" name="adm" value="2" checked="checked">
+								Não
+							</label> 
 						</div>
 						@endif
+					</div>
 
-						<!-- Administrador -->
-						<div class="form-group">
-                            <label  class="col-md-4 control-label">Administrador</label>
-                            <div class="col-md-4"> 
-                                <label class="radio-inline">
-                                <input type="radio" id="adm" name="adm" value="1">
-                                    Sim
-                                </label>
-                            </div> 
-                            <div class="col-md-4"> 
-                                <label class="radio-inline">
-                                    <input type="radio" id="adm" name="adm" value="2" checked="checked">
-                                    Não
-                                </label> 
-                            </div>
-                        </div>
-
-						<!--Nome-->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Name (Full name)">Nome Completo</label>  
-							<div class="col-md-7">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-user">
-										</i>
-									</div>
-									<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome Completo" class="form-control input-md" value="{{$profile->nome}}">
+					<!--Nome-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="Name (Full name)">Nome Completo</label>  
+						<div class="col-md-7">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-user">
+									</i>
 								</div>
+								<input id="Name (Full name)" name="nome" required="required" type="text" placeholder="Nome Completo" class="form-control input-md" value="{{$profile->nome}}">
 							</div>
 						</div>
+					</div>
 
-						<!-- Data -->
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Date Of Birth">Data de Nascimento</label>  
-							<div class="col-md-7">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-birthday-cake"></i>
-									</div>
-									<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md" value="{{$profile->data_nascimento}}">
+					<!-- Data -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="Date Of Birth">Data de Nascimento</label>  
+						<div class="col-md-7">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-birthday-cake"></i>
 								</div>
-								<script>
-									$(document).ready(function(){
+								<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md" value="{{$profile->data_nascimento}}">
+							</div>
+							<script>
+								$(document).ready(function(){
 									var date_input=$('input[name="data_nascimento"]'); //our date input has the name "date"
 									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 									date_input.datepicker({
@@ -303,7 +318,11 @@
 								<div class="input-group-addon">
 									<i class="fa fa-commenting" style="font-size: 20px;"></i>
 								</div>
-								<input id="ness" name="descricao" required="required" type="text" placeholder="Descrição" class="form-control input-md" disabled>
+								<select id="ness" name="descricao" class="form-control col-md-7 col-xs-12" disabled>
+									<?php foreach($specialneeds as $specialneed): ?>
+										<option value="<?= $specialneed->id ?>"><?= $specialneed->descricao ?></option>
+									<?php endforeach; ?>
+								</select>
 								<input id="ness1" name="observacao" required="required" type="text" placeholder="Observação" class="form-control input-md" disabled>
 							</div>
 						</div>

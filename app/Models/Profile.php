@@ -30,7 +30,7 @@ class Profile extends Model{
 	}
 
 	public function specialneeds(){
-		return $this->belongsToMany('App\Models\SpecialNeed');
+		return $this->belongsToMany('App\Models\SpecialNeed')->withPivot('permanente','observacao');
 	}
 
 	public function subscriptions(){

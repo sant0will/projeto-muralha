@@ -31,20 +31,20 @@
 
 						<!-- Administrador -->
 						<div class="form-group">
-                            <label  class="col-md-4 control-label">Administrador</label>
-                            <div class="col-md-4"> 
-                                <label class="radio-inline">
-                                <input type="radio" id="adm" name="adm" value="1">
-                                    Sim
-                                </label>
-                            </div> 
-                            <div class="col-md-4"> 
-                                <label class="radio-inline">
-                                    <input type="radio" id="adm" name="adm" value="2" checked="checked">
-                                    Não
-                                </label> 
-                            </div>
-                        </div>
+							<label  class="col-md-4 control-label">Administrador</label>
+							<div class="col-md-4"> 
+								<label class="radio-inline">
+									<input type="radio" id="adm" name="adm" value="1">
+									Sim
+								</label>
+							</div> 
+							<div class="col-md-4"> 
+								<label class="radio-inline">
+									<input type="radio" id="adm" name="adm" value="2" checked="checked">
+									Não
+								</label> 
+							</div>
+						</div>
 
 						<!--Nome-->
 						<div class="form-group">
@@ -301,7 +301,11 @@
 								<div class="input-group-addon">
 									<i class="fa fa-commenting" style="font-size: 20px;"></i>
 								</div>
-								<input id="ness" name="descricao" required="required" type="text" placeholder="Descrição" class="form-control input-md" disabled>
+								<select id="ness" name="descricao" class="form-control col-md-7 col-xs-12" disabled>
+									<?php foreach($specialneeds as $specialneed): ?>
+										<option value="<?= $specialneed->id ?>"><?= $specialneed->descricao ?></option>
+									<?php endforeach; ?>
+								</select>
 								<input id="ness1" name="observacao" required="required" type="text" placeholder="Observação" class="form-control input-md" disabled>
 							</div>
 						</div>
@@ -311,14 +315,14 @@
 						<label class="col-md-4 control-label"></label>
 						<div class="col-md-4"> Permanente<br>
 							<label class="radio-inline">
-								<input id="ness2" type="radio" name="permanente" value="1"disabled>
+								<input id="ness2" type="radio" name="permanente" value="1" disabled>
 								Sim
 							</label>
 						</div> 
 						<br>
 						<div class="col-md-4"> 
 							<label class="radio-inline">
-								<input id="ness3" type="radio" name="permanente" value="2"  checked="checked"disabled>
+								<input id="ness3" type="radio" name="permanente" value="2"  checked="checked" disabled>
 								Não
 							</label> 
 						</div>
