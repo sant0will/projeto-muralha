@@ -65,20 +65,8 @@
 									<div class="input-group-addon">
 										<i class="fa fa-calendar-check-o"></i>
 									</div>
-									<input  name="data_inicio" required="required" placeholder="Data de Inicio" class="form-control input-md">
+									<input  name="data_inicio" required="required" type="date" placeholder="Data de Inicio" class="form-control input-md">
 								</div>
-								<script>
-									$(document).ready(function(){
-									var date_input=$('input[name="data_inicio"]'); //our date input has the name "date"
-									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-									date_input.datepicker({
-										format: 'yyyy-mm-dd',
-										container: container,
-										todayHighlight: true,
-										autoclose: true,
-									})
-								})
-							</script>
 						</div>
 					</div>
 
@@ -90,20 +78,8 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar-times-o "></i>
 								</div>
-								<input id="data_fim" name="data_fim" required="required" placeholder="Data do Fim" class="form-control input-md">
+								<input id="data_fim" name="data_fim" required="required" type="date" placeholder="Data do Fim" class="form-control input-md">
 							</div>
-							<script>
-								$(document).ready(function(){
-									var date_input=$('input[name="data_fim"]'); //our date input has the name "date"
-									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-									date_input.datepicker({
-										format: 'yyyy-mm-dd',
-										container: container,
-										todayHighlight: true,
-										autoclose: true,
-									})
-								})
-							</script>
 						</div>
 					</div>
 
