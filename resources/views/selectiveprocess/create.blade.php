@@ -67,68 +67,70 @@
 									</div>
 									<input  name="data_inicio" required="required" type="date" placeholder="Data de Inicio" class="form-control input-md">
 								</div>
-						</div>
-					</div>
-
-					<!-- Data -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Data de Fim</label>  
-						<div class="col-md-7">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-calendar-times-o "></i>
-								</div>
-								<input id="data_fim" name="data_fim" required="required" type="date" placeholder="Data do Fim" class="form-control input-md">
 							</div>
 						</div>
-					</div>
 
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Vagas para Cotas</label>  
-						<div class="col-md-7">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-list-ol ">
-									</i>
+						<!-- Data -->
+						<div class="form-group">
+							<label class="col-md-4 control-label">Data de Fim</label>  
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar-times-o "></i>
+									</div>
+									<input id="data_fim" name="data_fim" required="required" type="date" placeholder="Data do Fim" class="form-control input-md">
 								</div>
-								<input id="nome" name="vagas_cotas" required="required" type="text" placeholder="Vagas para Cotas" class="form-control input-md">
 							</div>
 						</div>
-					</div>
 
-					<!-- Cursos -->
-					<div class="form-group">
-						<label class="col-md-4 control-label"> Curso </label>  
-						<div class="col-md-4">
+						<!--Nome-->
+						<div class="form-group">
+							<label class="col-md-4 control-label">Vagas para Cotas</label>  
+							<div class="col-md-7">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-list-ol ">
+										</i>
+									</div>
+									<input id="nome" name="vagas_cotas" required="required" type="text" placeholder="Vagas para Cotas" class="form-control input-md">
+								</div>
+							</div>
+						</div>
 
-
-							<?php foreach($courses as $course): ?>	
-								<hr />
+						<!-- Cursos -->
+						<div class="form-group">
+							<label class="col-md-4 control-label"> Curso(s) </label><hr />		
+							@foreach($courses as $course)
 								<div class="row">
-									<label class="col-md-8 control-label" for="curso_{{ $course->id }}">{{$course->nome}}</label>
-									<input type="checkbox" id="curso_{{$course->id}}" name="curso_id[{{ $course->id }}][id]" class="col-md-4 col-xs-12" value="{{ $course->id }}">	
-								</div>								
-								<label class="col-md-4 control-label">Vagas</label>
-								<input id="nome" name="curso_id[{{ $course->id }}][vagas]" required="required" type="text" placeholder="Numero de vagas" class="form-control input-md">	
-							<?php endforeach; ?>
+								<div class="col-md-2 cursos"></div>
+									<div class="col-md-5 cursos">											
+										<label class="control-label" for="curso_{{ $course->id }}">{{$course->nome}}</label>
+										<input type="checkbox" id="curso_{{$course->id}}" name="curso_id[{{ $course->id }}][id]" value="{{ $course->id }}">
+									</div>	
+									<div class="col-md-2">
+										<label class="control-label">Vagas</label>
+									</div>
+									<div class="col-md-2">
+										<input id="nome" name="curso_id[{{ $course->id }}][vagas]" required="required" type="text" placeholder="Nº" class="form-control">
+									</div>
+								</div>
+							@endforeach							
 						</div>
-					</div>
 
-					<!-- Submit form -->
-					<div class="form-group">
-						<label class="col-md-4 control-label" ></label>  
-						<div class="col-md-4">
-							<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
-							<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
+						<!-- Submit form -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" ></label>  
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
+								<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
+							</div>
 						</div>
-					</div>
 
-				</fieldset>
-			</form>
+					</fieldset>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 <!-- jQuery Version 1.11.1 -->
@@ -151,6 +153,6 @@
 		document.getElementById("ness2").disabled = true;
 		document.getElementById("ness3").disabled = true;
 	}
-	
+
 </script>
 @endsection
