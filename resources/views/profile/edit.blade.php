@@ -23,7 +23,7 @@
 				action="{{action('ProfileController@update', Auth::user()->profile->id)}}">
 				{{csrf_field()}}
 				<input name="_method" type="hidden" value="PATCH">
-				<div class="panel-heading"><h3 align="center">Cadastro de Usuário</h3></div>
+				<div class="panel-heading"><h3 align="center">Atualização de Cadastro</h3></div>
 				<fieldset>
 					@if(session()->has('message'))
 					<div class="alert alert-success">
@@ -85,20 +85,8 @@
 								<div class="input-group-addon">
 									<i class="fa fa-birthday-cake"></i>
 								</div>
-								<input id="Date Of Birth" name="data_nascimento" required="required" placeholder="Data de Nascimento" class="form-control input-md" value="{{$profile->data_nascimento}}">
+								<input id="Date Of Birth" name="data_nascimento" required="required" type="date" placeholder="Data de Nascimento" class="form-control input-md" value="{{$profile->data_nascimento}}">
 							</div>
-							<script>
-								$(document).ready(function(){
-									var date_input=$('input[name="data_nascimento"]'); //our date input has the name "date"
-									var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-									date_input.datepicker({
-										format: 'yyyy-mm-dd',
-										container: container,
-										todayHighlight: true,
-										autoclose: true,
-									})
-								})
-							</script>
 						</div>
 					</div>
 
