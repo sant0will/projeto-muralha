@@ -45,6 +45,7 @@ class SelectiveProcessController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $selectiveprocess = new SelectiveProcess();
         $selectiveprocess->nome=$request->nome;
         $selectiveprocess->descricao=$request->descricao;
@@ -53,26 +54,22 @@ class SelectiveProcessController extends Controller
         $selectiveprocess->ativo=1;
 
         if($selectiveprocess->save()){
-            $cotas = SelectiveProcess::find(1);            
-            $quotaselectiveprocess = new QuotaSelectiveProcess();
-            $quotaselectiveprocess->vagas=$request->vagas_cotas;
-            $quotaselectiveprocess->processo_seletivo_id=$selectiveprocess->id;
-            $quotaselectiveprocess->cota_id=1;
+                $dados = [];
+                $selected_curso = $request->curso_id;
 
-            $selectiveprocess = SelectiveProcess::find($selectiveprocess->id);
-            $courseselectiveprocess = new CourseSelectiveProcess();
-            $courseselectiveprocess->vagas=$request->vagas;            
-            $courseselectiveprocess->processo_seletivo_id=$selectiveprocess->id;
-            $courseselectiveprocess->curso_id=$request->cursos;
+                foreach ($selected_curso as $sc) {
 
-            if($quotaselectiveprocess->save() && $courseselectiveprocess->save()){
+                    if (array_key_exists('id', $sc)) {
+                        $dados[$sc['id']] = ['vagas' => $sc['vagas']];
+
+                    }
+                }
+
+                $selectiveprocess->courses()->sync($dados);
                 return redirect('home')->with('message', 'Processo Seletivo Adicionado!');
             }else{
                 return redirect('home')->with('message', 'Algo deu errado!');
             }
-
-        }
-
 
     }
 

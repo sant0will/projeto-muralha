@@ -105,6 +105,7 @@
 
                           </div>
                         </div>
+                        <br>
                         <div class="col-md-4 col-sm-4 col-xs-4">
                           <a href="/profile/{{Auth::user()->profile->id}}/edit" class="btn btn-primary">Editar</a>
                         </div>

@@ -304,9 +304,9 @@
 								
 								
 								<?php foreach($specialneeds as $specialneed): ?>
-									<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" />
+									<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" checked="true" />
 									<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label>
-									<input id="ness1" name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control input-md" />
+									<input id="ness1" name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control input-md" value="surdo" />
 
 									<div class="form-group">
 										<label class="col-md-4 control-label"></label>

@@ -54,6 +54,7 @@ class ProfileController extends Controller{
     {
         //Atribuição do form para o model Profile
 
+        
         $profile = new Profile();
         $profile->adm = $request->adm;
         $profile->nome = $request->nome;
@@ -139,9 +140,10 @@ class ProfileController extends Controller{
     
 
     public function edit($id){
-        $profile = Profile::find($id);
+        $profile = Profile::find($id);        
         $specialneeds = SpecialNeed::all();
-        return view('profile.edit')->with('profile', $profile)->with('specialneeds',$specialneeds);
+        $ob = $profile->specialneeds->observacao;
+        return view('profile.edit')->with('ob', $ob)->with('specialneeds',$specialneeds);
     }
 
     /**

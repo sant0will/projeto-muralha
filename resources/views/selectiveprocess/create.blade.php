@@ -109,21 +109,7 @@
 
 					<!--Nome-->
 					<div class="form-group">
-					<label class="col-md-4 control-label">Vagas</label>  
-						<div class="col-md-7">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-list-ol ">
-									</i>
-								</div>
-								<input id="nome" name="vagas" required="required" type="text" placeholder="Numero de vagas" class="form-control input-md">
-							</div>
-						</div>
-					</div>
-
-					<!--Nome-->
-					<div class="form-group">
-					<label class="col-md-4 control-label">Vagas para Cotas</label>  
+						<label class="col-md-4 control-label">Vagas para Cotas</label>  
 						<div class="col-md-7">
 							<div class="input-group">
 								<div class="input-group-addon">
@@ -139,11 +125,17 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label"> Curso </label>  
 						<div class="col-md-4">
-							<select name="cursos" class="form-control col-md-7 col-xs-12">
-								<?php foreach($courses as $course): ?>
-									<option value="<?= $course->id ?>"><?= $course->nome ?></option>
-								<?php endforeach; ?>
-							</select>
+
+
+							<?php foreach($courses as $course): ?>	
+								<hr />
+								<div class="row">
+									<label class="col-md-8 control-label" for="curso_{{ $course->id }}">{{$course->nome}}</label>
+									<input type="checkbox" id="curso_{{$course->id}}" name="curso_id[{{ $course->id }}][id]" class="col-md-4 col-xs-12" value="{{ $course->id }}">	
+								</div>								
+								<label class="col-md-4 control-label">Vagas</label>
+								<input id="nome" name="curso_id[{{ $course->id }}][vagas]" required="required" type="text" placeholder="Numero de vagas" class="form-control input-md">	
+							<?php endforeach; ?>
 						</div>
 					</div>
 
