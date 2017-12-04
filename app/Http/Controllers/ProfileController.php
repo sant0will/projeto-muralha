@@ -106,7 +106,6 @@ class ProfileController extends Controller{
                     if (array_key_exists('id', $ssn)) {
                         $dados[$ssn['id']] = ['observacao' => $ssn['observacao'], 
                                               'permanente' => $ssn['permanente']];
-
                     }
                 }
 
@@ -128,7 +127,7 @@ class ProfileController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function show($id){        
-        $profile = Profile::find($id);
+        $profile = Profile::find($id);    
         return view('profile.show',compact('profile','id'));
     }
     /**
@@ -140,10 +139,9 @@ class ProfileController extends Controller{
     
 
     public function edit($id){
-        $profile = Profile::find($id);        
-        $specialneeds = SpecialNeed::all();
-        $ob = $profile->specialneeds->observacao;
-        return view('profile.edit')->with('ob', $ob)->with('specialneeds',$specialneeds);
+        $profile = Profile::find($id);  
+        $specialneeds = SpecialNeed::all();      
+        return view('profile/edit')->with('profile',$profile)->with('specialneeds',$specialneeds);
     }
 
     /**

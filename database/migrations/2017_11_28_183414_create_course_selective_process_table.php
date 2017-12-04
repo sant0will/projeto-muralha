@@ -1,10 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseSelectiveProcessesTable extends Migration
+class CreateCourseSelectiveProcessTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +12,15 @@ class CreateCourseSelectiveProcessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_selective_processes', function (Blueprint $table) {
-            $table->integer('curso_id')->unsigned();
-            $table->foreign('curso_id')->references('id')->on('courses');
-            $table->integer('processo_seletivo_id')->unsigned();
-            $table->foreign('processo_seletivo_id')->references('id')->on('selective_processes');
+        Schema::create('course_selective_process', function (Blueprint $table) {
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->integer('selective_process_id')->unsigned();
+            $table->foreign('selective_process_id')->references('id')->on('selective_processes');
             $table->integer('vagas');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

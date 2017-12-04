@@ -13,14 +13,14 @@
                   <div class="x_panel">
                     <div class="x_title">
                       <div class="clearfix"></div>
-                    </div>
-                    <div class="row">
+                  </div>
+                  <div class="row">
                       @if(session()->has('message'))
                       <div class="alert alert-success">
                         {{ session()->get('message') }}
-                      </div>
-                      @endif
-                      <div class="col-md-8 col-sm-8 col-xs-8">
+                    </div>
+                    @endif
+                    <div class="col-md-8 col-sm-8 col-xs-8">
                         <div class="x_content">          
                           <dl class="dl-horizontal">
                             <hr /><h5>Dados Pessoais </h5>
@@ -88,8 +88,13 @@
                             <dt>País</dt>
                             <dd> {{$profile->address->pais}}</dd>
 
-                            <hr /><h5>Necessidades Especiais</h5>
+                            <?php $flag = 0;?>
                             @foreach($profile->specialneeds as $specialneed)
+                            @if($flag == 0)
+                            <?php $flag = 1;?>
+                            <hr /><h5>Necessidades Especiais </h5>
+                            
+                            @endif
                             <br>
                             <dt>Descrição</dt>
                             <dd> {{$specialneed->descricao}}</dd>
@@ -103,24 +108,24 @@
                             @endif
                             @endforeach
 
-                          </div>
                         </div>
-                        <br>
-                        <div class="col-md-4 col-sm-4 col-xs-4">
-                          <a href="/profile/{{Auth::user()->profile->id}}/edit" class="btn btn-primary">Editar</a>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <a href="/home" class="btn btn-primary">Voltar</a>
-                      </div>
                     </div>
+                    <br>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <a href="/profile/{{Auth::user()->profile->id}}/edit" class="btn btn-primary">Editar</a>
                   </div>
-                </div>
               </div>
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="/home" class="btn btn-primary">Voltar</a>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  @endsection
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+@endsection

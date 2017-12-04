@@ -230,3 +230,7 @@ a:hover{ text-decoration: none; }
 	dt{
 		width: 200px;
 	}
+
+	th, td{
+		font-size: 12px;
+	}

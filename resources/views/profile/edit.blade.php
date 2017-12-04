@@ -281,44 +281,77 @@
 							</div>
 						</div>
 					</div>
+					<hr />
+					<!--Necessidades Especiais-->
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8 col-sm-8 col-xs-8">
+								<div class="x_content">          
+									<dl class="dl-horizontal">
+										<?php $flag = 0;?>
+										@foreach($profile->specialneeds as $specialneed)
+										@if($flag == 0)
+										<?php $flag = 1;?>
+										<h5 style="margin-left: 20px;">Suas Necessidades Especiais </h5>
+
+										@endif
+										<br>
+										<dt>Descrição</dt>
+										<dd> {{$specialneed->descricao}}</dd>
+										<dt>Observação</dt>
+										<dd> {{$specialneed->pivot->observacao}}</dd>
+										<dt>Permanente</dt>
+										@if($specialneed->pivot->permanente == 1)
+										<dd> Sim </dd>
+										@else
+										<dd> Não  </dd>
+										@endif
+										@endforeach
+
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>					
+
 
 					<hr />
-					<h3>Necessidades Especiais</h3>
-
+					@foreach($specialneeds as $specialneed)
 					<div class="form-group">
-						<label class="col-md-4 control-label"></label>  
-						<div class="col-md-6">
-							<div class="input-group">
-								
-								
-								<?php foreach($specialneeds as $specialneed): ?>
-									<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" checked="true" />
-									<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label>
-									<input id="ness1" name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control input-md" value="surdo" />
-
-									<div class="form-group">
-										<label class="col-md-4 control-label"></label>
-										<div class="col-md-4"> Permanente<br>
-											<label class="radio-inline">
-												<input id="ness2" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1">
-												Sim
-											</label>
-										</div> 
-										<br>
-										<div class="col-md-4"> 
-											<label class="radio-inline">
-												<input id="ness3" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0"  checked="checked">
-												Não
-											</label> 
-										</div>
-									</div>
-								<?php endforeach; ?>
-								
+						<div class="row">
+							<div class="col-md-1">
+							</div>
+							<div class="col-md-4">
+								<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" />
+								<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label><br>
+							</div>
+							<div class="col-md-6 ">
+								<input name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-1">
+							</div>
+							<div class="col-md-2"> 
+								<label>Permanente</label>
+							</div>
+							<div class="col-md-4">
+								<label class="radio-inline">
+									<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1">
+									Sim
+								</label>
+							</div> 
+							<div class="col-md-4"> 
+								<label class="radio-inline">
+									<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0"  checked="checked">
+									Não
+								</label> 
 							</div>
 						</div>
 					</div>
 
-					
+					<hr />
+					@endforeach
 
 					<!-- Submit form -->
 					<div class="form-group">
@@ -356,6 +389,6 @@
 		document.getElementById("ness2").disabled = true;
 		document.getElementById("ness3").disabled = true;
 	}
-	
+
 </script>
 @endsection

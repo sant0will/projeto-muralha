@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuotaSelectiveProcessesTable extends Migration
+class CreateQuotaSelectiveProcessTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateQuotaSelectiveProcessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quota_selective_processes', function (Blueprint $table) {            
-            $table->integer('cota_id')->unsigned();
-            $table->foreign('cota_id')->references('id')->on('quotas');
-            $table->integer('processo_seletivo_id')->unsigned();
-            $table->foreign('processo_seletivo_id')->references('id')->on('selective_processes');
+        Schema::create('quota_selective_process', function (Blueprint $table) {            
+            $table->integer('quota_id')->unsigned();
+            $table->foreign('quota_id')->references('id')->on('quotas');
+            $table->integer('selective_process_id')->unsigned();
+            $table->foreign('selective_process_id')->references('id')->on('selective_processes');
             $table->integer('vagas');
             $table->timestamps();
         });

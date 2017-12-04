@@ -83,20 +83,6 @@
 							</div>
 						</div>
 
-						<!--Nome-->
-						<div class="form-group">
-							<label class="col-md-4 control-label">Vagas para Cotas</label>  
-							<div class="col-md-7">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-list-ol ">
-										</i>
-									</div>
-									<input id="nome" name="vagas_cotas" required="required" type="text" placeholder="Vagas para Cotas" class="form-control input-md">
-								</div>
-							</div>
-						</div>
-
 						<!-- Cursos -->
 						<div class="form-group">
 							<label class="col-md-4 control-label"> Curso(s) </label><hr />		
@@ -111,7 +97,27 @@
 										<label class="control-label">Vagas</label>
 									</div>
 									<div class="col-md-2">
-										<input id="nome" name="curso_id[{{ $course->id }}][vagas]" required="required" type="text" placeholder="Nº" class="form-control">
+										<input id="nome" name="curso_id[{{ $course->id }}][vagas]" type="text" placeholder="Nº" class="form-control">
+									</div>
+								</div>
+							@endforeach							
+						</div>
+
+						<!-- Cotas -->
+						<div class="form-group">
+							<label class="col-md-4 control-label"> Cota(s) </label><hr />		
+							@foreach($quotas as $quota)
+								<div class="row">
+								<div class="col-md-2 cursos"></div>
+									<div class="col-md-5 cursos">											
+										<label class="control-label" for="cota_{{ $quota->id }}">{{$quota->descricao}}</label>
+										<input type="checkbox" id="cota_{{$quota->id}}" name="quota_id[{{ $quota->id }}][id]" value="{{ $quota->id }}">
+									</div>	
+									<div class="col-md-2">
+										<label class="control-label">Vagas</label>
+									</div>
+									<div class="col-md-2">
+										<input id="nome" name="quota_id[{{ $quota->id }}][vagas]" type="text" placeholder="Nº" class="form-control">
 									</div>
 								</div>
 							@endforeach							
@@ -122,7 +128,7 @@
 							<label class="col-md-4 control-label" ></label>  
 							<div class="col-md-4">
 								<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
-								<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
+								<a href="admin" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
 							</div>
 						</div>
 

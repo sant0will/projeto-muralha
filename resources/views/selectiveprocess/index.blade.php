@@ -35,6 +35,7 @@
               <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Curso</th>
                 <th>Data de Ínicio</th>
                 <th>Data de Fim</th>
                 <th>Acão</th>
@@ -42,7 +43,12 @@
               @foreach($selectiveprocess as $sp)
               <tr>
                 <td> {{$sp->id}} </td>
-                <td> {{$sp->nome}} </td>
+                <td> {{$sp->descricao}} </td>
+                <td>
+                @foreach($sp->courses as $spc)
+                 {{$spc->nome}}<br>
+                @endforeach
+                </td>
                 <td> {{$sp->data_inicio}} </td>
                 <td> {{$sp->data_fim}} </td>
                 <td> <a href="/subscription/create" class="btn btn-success">Inscrever-se</a> </td>

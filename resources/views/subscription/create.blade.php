@@ -34,13 +34,13 @@
 						<label class="col-md-4 control-label">Gostaria de Pedir Isenção?</label>
 						<div class="col-md-4"> 
 							<label class="radio-inline">
-								<input type="radio" value="1" onclick="habilitar()">
+								<input type="radio" value="1" name="isencao"onclick="habilitar()">
 								Sim
 							</label>
 						</div> 
 						<div class="col-md-4"> 
 							<label class="radio-inline">
-								<input type="radio" value="2"  checked="checked" onclick="desabilitar()">
+								<input type="radio" value="2" name="isencao" onclick="desabilitar()" checked>
 								Não
 							</label> 
 						</div>

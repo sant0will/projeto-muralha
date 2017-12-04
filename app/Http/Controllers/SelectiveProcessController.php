@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course as Course;
+use App\Models\Quota as Quota;
 use App\Models\SelectiveProcess as SelectiveProcess;
 use App\Models\QuotaSelectiveProcess as QuotaSelectiveProcess;
 use App\Models\CourseSelectiveProcess as CourseSelectiveProcess;
@@ -34,7 +35,8 @@ class SelectiveProcessController extends Controller
     public function create()
     {
         $courses = Course::all();
-        return view('selectiveprocess/create')->with('courses', $courses);
+        $quotas = Quota::all();
+        return view('selectiveprocess/create')->with('courses', $courses)->with('quotas', $quotas);
     }
 
     /**
@@ -45,7 +47,6 @@ class SelectiveProcessController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $selectiveprocess = new SelectiveProcess();
         $selectiveprocess->nome=$request->nome;
         $selectiveprocess->descricao=$request->descricao;
@@ -54,18 +55,31 @@ class SelectiveProcessController extends Controller
         $selectiveprocess->ativo=1;
 
         if($selectiveprocess->save()){
-                $dados = [];
+                $dados1 = [];
                 $selected_curso = $request->curso_id;
 
                 foreach ($selected_curso as $sc) {
 
                     if (array_key_exists('id', $sc)) {
-                        $dados[$sc['id']] = ['vagas' => $sc['vagas']];
+                        $dados1[$sc['id']] = ['vagas' => $sc['vagas']];
 
                     }
                 }
 
-                $selectiveprocess->courses()->sync($dados);
+                $selectiveprocess->courses()->sync($dados1);
+
+                $dados2 = [];
+                $selected_cota = $request->quota_id;
+
+                foreach ($selected_cota as $sct) {
+
+                    if (array_key_exists('id', $sct)) {
+                        $dados2[$sct['id']] = ['vagas' => $sct['vagas']];
+
+                    }
+                }
+
+                $selectiveprocess->quotas()->sync($dados2);
                 return redirect('home')->with('message', 'Processo Seletivo Adicionado!');
             }else{
                 return redirect('home')->with('message', 'Algo deu errado!');

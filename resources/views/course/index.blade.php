@@ -49,7 +49,7 @@
 						<label class="col-md-4 control-label" ></label>  
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Enviar</button>
-							<a href="/home" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
+							<a href="admin" class="btn btn-danger" value=""><span class="fa fa-times"></span> Cancelar</a>
 						</div>
 					</div>
 
