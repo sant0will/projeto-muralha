@@ -96,8 +96,7 @@ class SelectiveProcessController extends Controller
     public function show($id)
     {
         
-        $sp = SelectiveProcess::find($id);
-        
+        $sp = SelectiveProcess::find($id);        
         return view('selectiveprocess.show',compact('sp','id'));
 
     }
@@ -110,13 +109,11 @@ class SelectiveProcessController extends Controller
      */
     public function edit($id)
     {
-        $sp = SelectiveProcess::find($id);
-        foreach($sp->courses as $course){
-            $course1 = $course->vagas;
-            dd($course1);
-        }
+        $courses = Course::all();
 
-        return view('selectiveprocess.edit',compact('sp','id'));
+        $quotas = Quota::all();
+        $sp = SelectiveProcess::find($id);
+        return view('selectiveprocess.edit',compact('sp','id'))->with('courses', $courses)->with('quotas', $quotas);
     }
 
     /**
@@ -128,7 +125,44 @@ class SelectiveProcessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $selectiveprocess = SelectiveProcess::find($id);
+        $selectiveprocess->nome=$request->nome;
+        $selectiveprocess->descricao=$request->descricao;
+        $selectiveprocess->data_inicio=$request->data_inicio;
+        $selectiveprocess->data_fim=$request->data_fim;
+        $selectiveprocess->ativo=$request->ativacao;
+
+        if($selectiveprocess->save()){
+                $dados1 = [];
+                $selected_curso = $request->curso_id;
+
+                foreach ($selected_curso as $sc) {
+
+                    if (array_key_exists('id', $sc)) {
+                        $dados1[$sc['id']] = ['vagas' => $sc['vagas']];
+
+                    }
+                }
+
+                $selectiveprocess->courses()->sync($dados1);
+
+                $dados2 = [];
+                $selected_cota = $request->quota_id;
+
+                foreach ($selected_cota as $sct) {
+
+                    if (array_key_exists('id', $sct)) {
+                        $dados2[$sct['id']] = ['vagas' => $sct['vagas']];
+
+                    }
+                }
+
+                $selectiveprocess->quotas()->sync($dados2);
+                return redirect('home')->with('message', 'Processo Seletivo Atualizado!');
+            }else{
+                return redirect('home')->with('message', 'Algo deu errado!');
+            }
+
     }
 
     /**

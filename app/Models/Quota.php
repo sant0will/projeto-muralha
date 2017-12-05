@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quota extends Model
 {
+	protected $fillable = [
+	 'vagas',
+	];
+	
     public function selectiveprocess(){
         return $this->belongsToMany('App\Models\SelectiveProcess')->withPivot('vagas');
     }
