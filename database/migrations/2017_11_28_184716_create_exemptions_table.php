@@ -17,7 +17,7 @@ class CreateExemptionsTable extends Migration
             $table->integer('inscricao_id')->unsigned();
             $table->foreign('inscricao_id')->references('id')->on('subscriptions');  
             $table->string('motivo');
-            $table->tinyInteger('homologacao');
+            $table->tinyInteger('homologacao')->nullable();
             $table->timestamps();
         });
     }

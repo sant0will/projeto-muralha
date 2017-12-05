@@ -95,7 +95,11 @@ class SelectiveProcessController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $sp = SelectiveProcess::find($id);
+        
+        return view('selectiveprocess.show',compact('sp','id'));
+
     }
 
     /**
@@ -106,7 +110,13 @@ class SelectiveProcessController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sp = SelectiveProcess::find($id);
+        foreach($sp->courses as $course){
+            $course1 = $course->vagas;
+            dd($course1);
+        }
+
+        return view('selectiveprocess.edit',compact('sp','id'));
     }
 
     /**

@@ -281,7 +281,6 @@
 							</div>
 						</div>
 					</div>
-					<hr />
 					<!--Necessidades Especiais-->
 					<div class="form-group">
 						<div class="row">

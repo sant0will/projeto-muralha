@@ -44,18 +44,23 @@
           @else
           <a href="/profile/create">Perfil</a>
           @endif
-
+          @if ((Auth::user()->profile) != null)
         </div>
         <div class="item">
           <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess">Processos Seletivos</a>
         </div>
         
-        @if ((Auth::user()->profile) != null)
         @if ((Auth::user()->profile->adm) == 1)
         <div class="item">
           <span class="fa fa-user-secret fafa fa-lg"></span><a href="/admin">Parte Administrativa</a>
         </div>
         @endif   
+        
+        @if ((Auth::user()->profile->adm) == 0)
+        <div class="item">
+          <span class="fa fa-check-circle-o fafa fa-lg"></span><a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">Inscrições</a>
+        </div>
+        @endif
         @endif
 
         <div class="item">
@@ -70,3 +75,4 @@
   </div>
   @yield('content')
 </body>
+

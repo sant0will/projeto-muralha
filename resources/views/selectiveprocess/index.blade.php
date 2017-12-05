@@ -20,46 +20,52 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-2">
       <div class="panel panel-default">
-        <form class="form-horizontal" method="post" action="{{url('subscription/create')}}">
-          {{csrf_field()}}
-          <div class="panel-heading"><h3 align="center">Processos Seletivos Abertos</h3></div>
-          <fieldset>
-            @if(session()->has('message'))
-            <div class="alert alert-success">
-              {{ session()->get('message') }}
-            </div>
-            @endif
+        {{csrf_field()}}
+        <div class="panel-heading"><h3 align="center">Processos Seletivos Abertos</h3></div>
+        <fieldset>
+          @if(session()->has('message'))
+          <div class="alert alert-success">
+            {{ session()->get('message') }}
+          </div>
+          @endif
 
-            <table class="table" style="margin-left: 1px;">
-              <br>
-              <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Curso</th>
-                <th>Data de Ínicio</th>
-                <th>Data de Fim</th>
-                <th>Acão</th>
-              </tr>
-              @foreach($selectiveprocess as $sp)
-              <tr>
-                <td> {{$sp->id}} </td>
-                <td> {{$sp->descricao}} </td>
-                <td>
+          <table class="table" style="margin-left: 1px;">
+            <br>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Curso</th>
+              <th>Data de Ínicio</th>
+              <th>Data de Fim</th>
+              <th>Acão</th>
+            </tr>
+            @foreach($selectiveprocess as $sp)
+            <tr>
+              <td> {{$sp->id}} </td>
+              <td> {{$sp->descricao}} </td>
+              <td>
                 @foreach($sp->courses as $spc)
-                 {{$spc->nome}}<br>
+                {{$spc->nome}}<br>
                 @endforeach
-                </td>
-                <td> {{$sp->data_inicio}} </td>
-                <td> {{$sp->data_fim}} </td>
-                <td> <a " class="btn btn-success">Inscrever-se</a> </td>
+              </td>
+              <td> {{$sp->data_inicio}} </td>
+              <td> {{$sp->data_fim}} </td>
+
+              @if ((Auth::user()->profile->adm) == 1)
+              <td>
+                <a href="/selectiveprocess/{{$sp->id}}/edit" class="btn btn-success">Editar</a>
+              </td>
+              @else
+              <td> 
+                <a href="{{action('SelectiveProcessController@show', $sp['id'])}}" class="btn btn-success">Inscrever-se</a> </td>
+                @endif
               </tr>
               @endforeach
             </table>
           </fieldset>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-@endsection
+  @endsection

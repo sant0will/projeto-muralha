@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Exemption as Exemption;
 use App\Models\Subscription as Subscription;
 use App\Models\Course as Course;
 use App\Models\Quota as Quota;
+use App\Models\Profile as Profile;
 use App\Models\SelectiveProcess as SelectiveProcess;
 use App\Models\QuotaSelectiveProcess as QuotaSelectiveProcess;
 use App\Models\CourseSelectiveProcess as CourseSelectiveProcess;
@@ -42,25 +45,51 @@ class SubscriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $isencao = new Exemption;
+    public function store(Request $request){
         $inscricao = new Subscription;
-        
-        $isencao->motivo=$request->motivo;
-        $isencao->motivo=2;
-        $isencao->save();
 
-        $inscricao->data_inscricao=date();
-        $inscricao->data_pagamento=date();
-        $inscricao->data_pagamento=2;
+        //Atribuição das Datas
+        $inscricao->data_inscricao=date("Y-m-d");
+        $inscricao->data_pagamento=date("Y-m-d");
+        $inscricao->pago=0;
 
-        if($cota->save()){
-            return redirect('quota')->with('message', 'Cota Cadastrado com sucesso!');
-        }else{
-            return redirect('quota')->with('message', 'Algo deu errado!');
-        }
-    }
+        //Atribuição do curso e cota
+        $selected_curso = $request->curso_id;
+        $selected_quota = $request->quota_id;
+
+        foreach ($selected_curso as $sc){
+            if (array_key_exists('id', $sc)){
+               $c_id = $sc['id'];
+           }
+       }
+
+       foreach ($selected_quota as $sq) {
+        if (array_key_exists('id', $sq)) {
+           $q_id = $sq['id'];
+       }
+   }
+   $inscricao->cota_id = $q_id;
+   $inscricao->curso_id = $c_id;
+
+        //Atribuição do Processo Seletivo
+   $inscricao->processo_seletivo_id = $request->selectiveprocess;
+   $inscricao->profile_id = Auth::user()->profile->id;
+
+   if($inscricao->save() && $request->isencao == 1){
+            //Atribuição da isenção
+    $isencao = new Exemption;
+    $isencao->motivo=$request->motivo;
+    $isencao->inscricao_id=$inscricao->id;
+    $isencao->save();
+
+            //retorno com mensagm de sucesso ou error
+    return redirect('home')->with('message', 'Inscrição Realizada com Sucesso!');
+}
+else {
+    return redirect('home')->with('message', 'Algo deu Errado!');
+}    
+
+}
 
     /**
      * Display the specified resource.
@@ -70,7 +99,22 @@ class SubscriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $inscricoes = Subscription::all();
+        $profile = Profile::find($id);
+        $selectiveprocess = SelectiveProcess::all();
+        $courses = Course::all();
+        $quotas = Quota::all();
+        $isencao = Exemption::all();
+        foreach ($inscricoes as $inscricao) {
+            if($inscricao->profile_id == $id){
+                return view('subscription/show')->with('inscricao',$inscricao)
+                                                ->with('profile', $profile)
+                                                ->with('selectiveprocess', $selectiveprocess)
+                                                ->with('courses', $courses)
+                                                ->with('quotas', $quotas)
+                                                ->with('isencao', $isencao);
+            }
+        }
     }
 
     /**

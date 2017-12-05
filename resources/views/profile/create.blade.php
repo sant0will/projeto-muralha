@@ -1,14 +1,102 @@
 @extends('layouts.standard')
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+	<script type="text/javascript">
+	function habilitar(){
+		document.getElementById("ness").disabled = false;
+		document.getElementById("ness1").disabled = false;
+		document.getElementById("ness2").disabled = false;
+		document.getElementById("ness3").disabled = false;
+	}
+
+	function desabilitar(){
+		document.getElementById("ness").disabled = true;
+		document.getElementById("ness1").disabled = true;
+		document.getElementById("ness2").disabled = true;
+		document.getElementById("ness3").disabled = true;
+	}
 	
+</script>
+
+	<!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <!-- Adicionando Javascript -->
+    <script type="text/javascript" >
+
+        $(document).ready(function() {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+                        $("#pais").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                                $("#pais").val("Brasil");
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+    </script>
 	<style>
 		.othertop{margin-top:10px;}
 		.input-group-addon{width: 45px;}
@@ -171,53 +259,60 @@
 						</div>
 
 						<!-- Endereço -->
-						<div class="form-group">
-							<label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
-							<div class="col-md-4  col-xs-4">
-								<input id="Permanent Address" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md ">
+						<form method="get" action=".">
+							<div class="form-group">
+								<label class="col-md-4 control-label col-xs-12" for="">Endereço</label>  
+								<div class="col-md-3  col-xs-4">
+									<input id="cep" name="cep" required="required" type="text" placeholder="CEP" 
+									class="form-control input-md" maxlength="9" value="">
+								</div>
 							</div>
-							<div class="col-md-2 col-xs-4">
-								<input id="Permanent Address" name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md ">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Permanent Address"></label>  
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md ">
+							<div class="form-group">
+								<label class="col-md-4 control-label" for=""></label> 
+								<div class="col-md-6  col-xs-4">
+									<input id="rua" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md ">
+								</div>
 							</div>
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md ">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Permanent Address"></label>  
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md ">
+							<div class="form-group">
+								<label class="col-md-4 control-label" for=""></label>  
+								<div class="col-md-3  col-xs-4">
+									<input id="bairro" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md ">
+								</div>
+								<div class="col-md-3  col-xs-4">
+									<input id="cidade" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md ">
+								</div>
 							</div>
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md ">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Permanent Address"></label>  
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md ">
-							</div>
-							<div class="col-md-3  col-xs-4">
-								<input id="Permanent Address" name="pais" required="required" type="text" placeholder="País" class="form-control input-md ">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label" for="Permanent Address"></label>  
-							<div class="col-md-6  col-xs-4">
-								<input id="Permanent Address" name="complemento" type="text" placeholder="Complemento" class="form-control input-md ">
+							<div class="form-group">
+								<label class="col-md-4 control-label" for=""></label>  
+								<div class="col-md-3  col-xs-4">
+									<input id="uf" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md ">
+								</div>	
+								<div class="col-md-3  col-xs-4">
+									<input id="pais" name="pais" required="required" type="text" placeholder="País" class="form-control input-md ">
+								</div>													
 							</div>
-						</div>
 
+							<div class="form-group">
+								<label class="col-md-4 control-label" for=""></label>  							
+								<div class="col-md-2 col-xs-4">
+									<input name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md ">
+								</div>
+								<div class="col-md-3  col-xs-4">
+									<input name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md ">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for=""></label>  
+								<div class="col-md-6  col-xs-4">
+									<input name="complemento" type="text" placeholder="Complemento" class="form-control input-md ">
+								</div>
+							</div>
+						</form>
 						<!-- Tipo Endereço -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="tipo_endereco"> Tipo de Endereço</label>
@@ -266,44 +361,44 @@
 						</div>
 
 						<!--Necessidades Especiais-->
-					<hr />
-					<h3>Necessidades Especiais</h3>
-					@foreach($specialneeds as $specialneed)
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-1">
+						<hr />
+						<h3>Necessidades Especiais</h3>
+						@foreach($specialneeds as $specialneed)
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" />
+									<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label><br>
+								</div>
+								<div class="col-md-6 ">
+									<input id="ness1" name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control" />
+								</div>
 							</div>
-							<div class="col-md-4">
-								<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" />
-								<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label><br>
-							</div>
-							<div class="col-md-6 ">
-								<input id="ness1" name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control" />
+							<div class="row">
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-2"> 
+									<label>Permanente</label>
+								</div>
+								<div class="col-md-4">
+									<label class="radio-inline">
+										<input id="ness2" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1">
+										Sim
+									</label>
+								</div> 
+								<div class="col-md-4"> 
+									<label class="radio-inline">
+										<input id="ness3" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0"  checked="checked">
+										Não
+									</label> 
+								</div>
 							</div>
 						</div>
-						<div class="row">
-						<div class="col-md-1">
-							</div>
-							<div class="col-md-2"> 
-								<label>Permanente</label>
-							</div>
-							<div class="col-md-4">
-								<label class="radio-inline">
-									<input id="ness2" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1">
-									Sim
-								</label>
-							</div> 
-							<div class="col-md-4"> 
-								<label class="radio-inline">
-									<input id="ness3" type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0"  checked="checked">
-									Não
-								</label> 
-							</div>
-						</div>
-					</div>
 
-					<hr />
-					@endforeach
+						<hr />
+						@endforeach
 
 						<!-- Submit form -->
 						<div class="form-group">
@@ -327,20 +422,5 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	function habilitar(){
-		document.getElementById("ness").disabled = false;
-		document.getElementById("ness1").disabled = false;
-		document.getElementById("ness2").disabled = false;
-		document.getElementById("ness3").disabled = false;
-	}
 
-	function desabilitar(){
-		document.getElementById("ness").disabled = true;
-		document.getElementById("ness1").disabled = true;
-		document.getElementById("ness2").disabled = true;
-		document.getElementById("ness3").disabled = true;
-	}
-	
-</script>
 @endsection
