@@ -234,3 +234,17 @@ a:hover{ text-decoration: none; }
 	th, td{
 		font-size: 12px;
 	}
+
+	.adm{
+		margin: 2% 2% 2% 5%;
+		padding: 10px;
+		background-color: #004080 ;
+		color: #fff;
+		border-radius: 3px;
+		text-align: center;
+	}
+
+	.adm:hover{
+		background-color: #ccebff ;
+		color: #002e4d;
+	}

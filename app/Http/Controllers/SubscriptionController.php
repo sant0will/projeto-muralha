@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Exemption as Exemption;
 use App\Models\Subscription as Subscription;
+use App\Models\Course as Course;
+use App\Models\Quota as Quota;
+use App\Models\SelectiveProcess as SelectiveProcess;
+use App\Models\QuotaSelectiveProcess as QuotaSelectiveProcess;
+use App\Models\CourseSelectiveProcess as CourseSelectiveProcess;
 
 class SubscriptionController extends Controller
 {
@@ -25,7 +30,10 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        return view('/subscription/create');
+        $selectiveprocess = SelectiveProcess::all();
+        $courses = Course::all();
+        $quotas = Quota::all();
+        return view('subscription/create')->with('courses', $courses)->with('quotas', $quotas)->with('selectiveprocess', $selectiveprocess);
     }
 
     /**

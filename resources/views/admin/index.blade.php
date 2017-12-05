@@ -16,47 +16,46 @@
 </head>
 @section('content')
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<form class="form-horizontal" method="post" action="{{url('profile')}}">
-					{{csrf_field()}}
-					<!--Nome-->
+			<div class="panel panel-default">			
+				<div class="panel-heading"><h3 align="center">Criação de Conteúdo</h3></div>
+				{{csrf_field()}}
+				<div class="row">
 					<div class="form-group">
-						<label class="col-md-4 control-label">Cursos</label>  
-						<div class="col-md-7">
-							<a href="/course" class="btn btn-success"> Criar</a>
-						</div>
+						<a href="/course"> 
+							<div class="col-md-5 adm" class="btn btn-success">
+								Cursos <i class="fa fa-bookmark"></i>
+							</div>
+						</a>						
+						<a href="/quota"> 
+							<div class="col-md-5 adm" class="btn btn-success">
+								Cotas <i class="fa fa-cc"></i>
+							</div>
+						</a>
 					</div>
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Cotas</label>  
-						<div class="col-md-7">
-							<a href="/quota" class="btn btn-success"> Criar</a>
-						</div>
+				</div>
+				<div class="row">
+					<div class="form-group">						
+						<a href="/selectiveprocess/create"> 
+							<div class="col-md-5 adm" class="btn btn-success">
+								Processos Seletivos <i class="fa fa-users"></i>
+							</div>
+						</a>
+						<a href="/specialneed"> 
+							<div class="col-md-5 adm" class="btn btn-success">
+								Necessidades Especiais <i class="fa fa-blind"></i>
+							</div>
+						</a>
 					</div>
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Processo Seletivo</label>  
-						<div class="col-md-7">
-							<a href="/selectiveprocess/create" class="btn btn-success"> Criar </a>
-						</div>
-					</div>
-
-					<!--Nome-->
-					<div class="form-group">
-						<label class="col-md-4 control-label">Nessecidade Especial</label>  
-						<div class="col-md-7">
-							<a href="/specialneed" class="btn btn-success"> Criar </a>
-						</div>
-					</div>
-
-				</fieldset>
-			</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-</div>
+
+
 
 <!-- jQuery Version 1.11.1 -->
 <script src="js/jquery.js"></script>

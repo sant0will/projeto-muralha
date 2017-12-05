@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-2">
       <div class="panel panel-default">
-        <form class="form-horizontal" method="post" action="{{url('profile')}}">
+        <form class="form-horizontal" method="post" action="{{url('subscription/create')}}">
           {{csrf_field()}}
           <div class="panel-heading"><h3 align="center">Processos Seletivos Abertos</h3></div>
           <fieldset>
@@ -51,7 +51,7 @@
                 </td>
                 <td> {{$sp->data_inicio}} </td>
                 <td> {{$sp->data_fim}} </td>
-                <td> <a href="/subscription/create" class="btn btn-success">Inscrever-se</a> </td>
+                <td> <a " class="btn btn-success">Inscrever-se</a> </td>
               </tr>
               @endforeach
             </table>
