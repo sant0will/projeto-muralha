@@ -39,7 +39,9 @@
               <th>Data de Fim</th>
               <th>Acão</th>
             </tr>
+
             @foreach($selectiveprocess as $sp)
+
             <tr>
               <td> {{$sp->id}} </td>
               <td> {{$sp->descricao}} </td>
@@ -57,15 +59,16 @@
               </td>
               @else
               <td> 
-                <a href="{{action('SelectiveProcessController@show', $sp['id'])}}" class="btn btn-success">Inscrever-se</a> </td>
-                @endif
-              </tr>
-              @endforeach
-            </table>
-          </fieldset>
-        </div>
+                <a href="{{action('SelectiveProcessController@show', $sp['id'])}}" class="btn btn-success">Inscrever-se</a>
+              </td>
+              @endif
+            </tr>
+            @endforeach
+
+          </table>
+        </fieldset>
       </div>
     </div>
   </div>
-
-  @endsection
+  </div>
+@endsection

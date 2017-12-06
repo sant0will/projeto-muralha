@@ -219,6 +219,12 @@ a:hover{ text-decoration: none; }
 		padding: 15px;	
 	}
 
+	.fafa label{
+		padding-left: 20px;
+		font-size: 15px;
+		font-family: Verdana,sans-serif;	
+	}
+
 	.collapse ul{
 		list-style: none;
 	}

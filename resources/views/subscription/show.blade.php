@@ -44,7 +44,7 @@
 					<!--Mostrando Nome do curso-->
 					@foreach($courses as $c)
 					@if(($subs->curso_id) == ($c->id))
-					<dt>Nome do Curso</dt>
+					<dt>Curso</dt>
 					<dd> {{$c->nome}}</dd>
 					@endif
 					@endforeach
@@ -52,7 +52,7 @@
 					<!--Mostrando a Cota-->
 					@foreach($quotas as $q)
 					@if(($subs->cota_id) == ($q->id))
-					<dt>Nome do Curso</dt>
+					<dt>Cota</dt>
 					<dd> {{$q->descricao}}</dd>
 					@endif
 					@endforeach

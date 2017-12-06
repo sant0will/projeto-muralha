@@ -87,16 +87,16 @@
 						<!-- Ativação -->
 						<hr />
 						<div class="form-group">
-							<label class="col-md-4 control-label"> Desativar </label>	
+							<label class="col-md-4 control-label"> Ativar </label>	
 							<div class="col-md-4">
 								<label class="radio-inline">
-									<input id="ness2" type="radio" name="ativacao" value="0">
+									<input id="ness2" type="radio" name="ativacao" value="1" checked="checked">
 									Sim
 								</label>
 							</div> 
 							<div class="col-md-4"> 
 								<label class="radio-inline">
-									<input id="ness3" type="radio" name="ativacao" value="1"  checked="checked">
+									<input id="ness3" type="radio" name="ativacao" value="0">
 									Não
 								</label> 
 							</div>							

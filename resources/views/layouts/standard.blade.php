@@ -40,71 +40,58 @@
     <div class="main"> 
       <aside>
         <div class="left w3-collapse w3-card w3-animate-left">
-          <div class="item">             
-            <span class="fa fa-user-o fafa fa-lg"></span>
-            <!--Verificação para obrigar a criação do perfil-->
-            @if (Auth::user()->profile)
-            <a href="{{action('ProfileController@show', Auth::user()->profile->id)}}">Perfil</a>
-            @else
-            <a href="/profile/create">Perfil</a>
-            @endif
-            @if ((Auth::user()->profile) != null)
-          </div>
 
-          <div class="item">
-            <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess">Processos Seletivos</a>
-          </div>
+          <!--Verificação para obrigar a criação do perfil-->
+          @if (Auth::user()->profile)
+          <a href="{{action('ProfileController@show', Auth::user()->profile->id)}}" >
+            <div class="item"">             
+            <span class="fa fa-user-o fafa fa-lg"><label>Perfil</label></span>
+            </div>            
+          </a>
+          @else
+          <div class="item">             
+            <span class="fa fa-user-o fafa fa-lg"></span><a href="/profile/create"><label>Perfil</label></a>
+          </div>          
+          @endif
+          @if ((Auth::user()->profile) != null)
+          
+          <!-- Mostrando processo seletivo -->
+          <a href="/selectiveprocess">
+            <div class="item">
+              <span class="fa fa-calendar fafa fa-lg"><label>Processos Seletivos</label></span>
+            </div>
+          </a>
           
           <!--Habilitar apenas para admins-->
           @if ((Auth::user()->profile->adm) == 1)
-          <div class="item">
-            <span class="fa fa-user-secret fafa fa-lg"></span><a href="/admin">Parte Administrativa</a>
-          </div>
+          <a href="/admin">
+            <div class="item">
+              <span class="fa fa-user-secret fafa fa-lg"><label>Administração</label></span>
+            </div>
+          </a>
           @endif   
           
           <!--Habilitar apenas para users-->
           @if ((Auth::user()->profile->adm) != 1)
-          <div class="item">
-            <span class="fa fa-check-circle-o fafa fa-lg"></span><a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">Inscrições</a>
-          </div>
+          <a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">
+            <div class="item">
+              <span class="fa fa-check-circle-o fafa fa-lg"><label>Inscrições</label></span>
+            </div>
+          </a>
           @endif
           @endif
-
+          <a href="{{ route('logout') }}" onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
           <div class="item">
-            <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">Sair</a>
+            <span class="fa fa-sign-out fafa fa-lg"><label>Sair</label></span>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               {{ csrf_field() }}
             </form>
-          </div>   
-        </div>
-<<<<<<< HEAD
-        @endif   
-        
-        <!--Habilitar apenas para users-->
-        @if ((Auth::user()->profile->adm) != 1)
-        <div class="item">
-          <span class="fa fa-check-circle-o fafa fa-lg"></span><a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">Inscrições</a>
-        </div>
-        @endif
-        @endif
-
-        <div class="item">
-          <span class="fa fa-sign-out fafa fa-lg"></span><a href="{{ route('logout') }}" onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">Sair</a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-          </form>
-        </div>   
-      </div>
-    </aside>          
-  </div>
-  @yield('content')
-</body>
-=======
-      </aside>          
+          </div>  
+        </a> 
+      </div> 
     </div>
-    @yield('content')
-  </body>
->>>>>>> d03c760b15d91742e65d5a9b7ff7137c0baa6926
-
+  </aside>          
+</div>
+@yield('content')
+</body>

@@ -11,6 +11,8 @@ INSERT INTO special_needs(descricao)
 VALUES ('Perda de Visão ou Cegueira');
 
 INSERT INTO quotas(descricao) 
+VALUES ('Sem Cota');
+INSERT INTO quotas(descricao) 
 VALUES ('Baixa Renda');
 INSERT INTO quotas(descricao)  
 VALUES ('Negros, Pardos e Indígenas');
