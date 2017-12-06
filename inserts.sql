@@ -1,4 +1,3 @@
-///// SPECIAL NEEDS /////
 
 INSERT INTO special_needs(descricao) 
 VALUES ('Perda Auditiva ou Surdez');
@@ -11,8 +10,6 @@ VALUES ('Disturbios da Fala e da Linguagem');
 INSERT INTO special_needs(descricao)  
 VALUES ('Perda de Visão ou Cegueira');
 
-///// QUOTAS /////
-
 INSERT INTO quotas(descricao) 
 VALUES ('Baixa Renda');
 INSERT INTO quotas(descricao)  
@@ -20,10 +17,12 @@ VALUES ('Negros, Pardos e Indígenas');
 INSERT INTO quotas(descricao)  
 VALUES ('Escola Pública');
 
-///// COURSES /////
-
 INSERT INTO courses(nome) 
 VALUES ('Ciência da Computação');
+INSERT INTO courses(nome) 
+VALUES ('Engenharia Elétrica');
+INSERT INTO courses(nome) 
+VALUES ('Pedagogia');
 INSERT INTO courses(nome) 
 VALUES ('Agropecuária');
 INSERT INTO courses(nome) 
@@ -36,10 +35,8 @@ INSERT INTO courses(nome)
 VALUES ('Eletrotécnica');
 INSERT INTO courses(nome) 
 VALUES ('Segurança do Trabalho');
-INSERT INTO courses(nome) 
-VALUES ('Engenharia Elétrica');
-INSERT INTO courses(nome) 
-VALUES ('Pedagogia');
+
+
 
 
 
