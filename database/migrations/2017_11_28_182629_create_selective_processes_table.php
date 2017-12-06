@@ -17,8 +17,8 @@ class CreateSelectiveProcessesTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('descricao')->nullable();
-            $table->dateTime('data_inicio');
-            $table->dateTime('data_fim');
+            $table->date('data_inicio');
+            $table->date('data_fim');
             $table->tinyInteger('ativo');
             $table->timestamps();
         });

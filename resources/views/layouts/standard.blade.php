@@ -64,7 +64,7 @@
         @endif   
         
         <!--Habilitar apenas para users-->
-        @if ((Auth::user()->profile->adm) == 0)
+        @if ((Auth::user()->profile->adm) != 1)
         <div class="item">
           <span class="fa fa-check-circle-o fafa fa-lg"></span><a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">Inscrições</a>
         </div>

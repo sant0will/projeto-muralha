@@ -11,7 +11,7 @@ class Course extends Model
 	];
 
     public function selectiveprocess(){
-        return $this->belongsToMany('App\Models\SelectiveProcess')->withPivot('vagas');
+        return $this->belongsToMany('App\Models\SelectiveProcess')->withPivot('vagas')->withTimestamps();
     }
 
 	public function subscriptions(){

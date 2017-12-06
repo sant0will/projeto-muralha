@@ -9,10 +9,83 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-	<style>
-		.othertop{margin-top:10px;}
-		.input-group-addon{width: 45px;}
-	</style>
+	<!-- Adicionando JQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+
+	<!-- Adicionando Javascript -->
+	<script type="text/javascript" >
+
+		$(document).ready(function() {
+
+			function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+                        $("#pais").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                        	if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                                $("#pais").val("Brasil");
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+    </script>
+
+    <style>
+    	.othertop{margin-top:10px;}
+    	.input-group-addon{width: 45px;}
+    </style>
 </head>
 @section('content')
 <div class="container">
@@ -188,53 +261,60 @@
 					</div>
 
 					<!-- Endereço -->
-					<div class="form-group">
-						<label class="col-md-4 control-label col-xs-12" for="Permanent Address">Endereço</label>  
-						<div class="col-md-4  col-xs-4">
-							<input id="Permanent Address" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md " value="{{$profile->address->rua}}">
+					<form method="get" action=".">
+						<div class="form-group">
+							<label class="col-md-4 control-label col-xs-12" for="">Endereço</label>  
+							<div class="col-md-3  col-xs-4">
+								<input id="cep" name="cep" required="required" type="text" placeholder="CEP" 
+								class="form-control input-md" maxlength="9" value="{{$profile->address->cep}}">
+							</div>
 						</div>
-						<div class="col-md-2 col-xs-4">
-							<input id="Permanent Address" name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md " value="{{$profile->address->numero}}">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md " value="{{$profile->address->bairro}}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label> 
+							<div class="col-md-6  col-xs-4">
+								<input id="rua" name="rua" required="required" type="text" placeholder="Rua" class="form-control input-md " value="{{$profile->address->rua}}">
+							</div>
 						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md " value="{{$profile->address->cidade}}">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="cep" required="required" type="text" placeholder="CEP" class="form-control input-md " value="{{$profile->address->cep}}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label>  
+							<div class="col-md-3  col-xs-4">
+								<input id="bairro" name="bairro" required="required" type="text" placeholder="Bairro" class="form-control input-md " value="{{$profile->address->bairro}}">
+							</div>
+							<div class="col-md-3  col-xs-4">
+								<input id="cidade" name="cidade" required="required" type="text" placeholder="Cidade" class="form-control input-md" value="{{$profile->address->cidade}}">
+							</div>
 						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md " value="{{$profile->naturalidade}}">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md " value="{{$profile->address->estado}}">
-						</div>
-						<div class="col-md-3  col-xs-4">
-							<input id="Permanent Address" name="pais" required="required" type="text" placeholder="País" class="form-control input-md " value="{{$profile->address->pais}}">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="Permanent Address"></label>  
-						<div class="col-md-6  col-xs-4">
-							<input id="Permanent Address" name="complemento" type="text" placeholder="Complemento" class="form-control input-md " value="{{$profile->address->complemento}}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label>  
+							<div class="col-md-3  col-xs-4">
+								<input id="uf" name="estado" required="required" type="text" placeholder="Estado" class="form-control input-md " value="{{$profile->address->estado}}">
+							</div>	
+							<div class="col-md-3  col-xs-4">
+								<input id="pais" name="pais" required="required" type="text" placeholder="País" class="form-control input-md " value="{{$profile->address->pais}}">
+							</div>													
 						</div>
-					</div>
 
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label>  							
+							<div class="col-md-2 col-xs-4">
+								<input name="numero" required="required" type="text" placeholder="Numero" class="form-control input-md " value="{{$profile->address->numero}}">
+							</div>
+							<div class="col-md-3  col-xs-4">
+								<input name="naturalidade" required="required" type="text" placeholder="Onde Nasceu?" class="form-control input-md " value="{{$profile->naturalidade}}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label>  
+							<div class="col-md-6  col-xs-4">
+								<input name="complemento" type="text" placeholder="Complemento" class="form-control input-md " value="{{$profile->address->complemento}}">
+							</div>
+						</div>
+					</form>
 					<!-- Tipo Endereço -->
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="tipo_endereco"> Tipo de Endereço</label>
@@ -281,75 +361,50 @@
 							</div>
 						</div>
 					</div>
-					<!--Necessidades Especiais-->
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-8 col-sm-8 col-xs-8">
-								<div class="x_content">          
-									<dl class="dl-horizontal">
-										<?php $flag = 0;?>
-										@foreach($profile->specialneeds as $specialneed)
-										@if($flag == 0)
-										<?php $flag = 1;?>
-										<h5 style="margin-left: 20px;">Suas Necessidades Especiais </h5>
 
-										@endif
-										<br>
-										<dt>Descrição</dt>
-										<dd> {{$specialneed->descricao}}</dd>
-										<dt>Observação</dt>
-										<dd> {{$specialneed->pivot->observacao}}</dd>
-										<dt>Permanente</dt>
-										@if($specialneed->pivot->permanente == 1)
-										<dd> Sim </dd>
-										@else
-										<dd> Não  </dd>
-										@endif
-										@endforeach
+					<hr />
 
-									</dl>
+					@foreach($specialneeds as $specialneed)
+						<?php $selected = false; ?>
+
+						@if ($profile->specialNeeds->contains('id', $specialneed->id))
+							<?php $selected = true; ?>
+						@endif
+
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" {{ ($selected) ? 'checked' : '' }}/>
+									<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label><br>
+								</div>
+								<div class="col-md-6 ">
+									<input name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control" value="{{ ($selected) ? $profile->specialNeeds->find($specialneed->id)->pivot->observacao : '' }}"/>
 								</div>
 							</div>
-						</div>
-					</div>					
-
-
-					<hr />
-					@foreach($specialneeds as $specialneed)
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-1">
-							</div>
-							<div class="col-md-4">
-								<input type="checkbox" name="special_need_id[{{ $specialneed->id }}][id]" value="{{ $specialneed->id }}" />
-								<label for="special_need_id[{{ $specialneed->id }}]">{{ $specialneed->descricao }}</label><br>
-							</div>
-							<div class="col-md-6 ">
-								<input name="special_need_id[{{ $specialneed->id }}][observacao]" type="text" placeholder="Observação" class="form-control" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-1">
-							</div>
-							<div class="col-md-2"> 
-								<label>Permanente</label>
-							</div>
-							<div class="col-md-4">
-								<label class="radio-inline">
-									<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1">
-									Sim
-								</label>
-							</div> 
-							<div class="col-md-4"> 
-								<label class="radio-inline">
-									<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0"  checked="checked">
-									Não
-								</label> 
+							<div class="row">
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-2"> 
+									<label>Permanente</label>
+								</div>
+								<div class="col-md-4">
+									<label class="radio-inline">
+										<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="1" {{ ($selected && $profile->specialNeeds->find($specialneed->id)->pivot->permanente) ? 'checked' : '' }} />
+										Sim
+									</label>
+								</div> 
+								<div class="col-md-4"> 
+									<label class="radio-inline">
+										<input type="radio" name="special_need_id[{{ $specialneed->id }}][permanente]" value="0" {{ ($selected && !$profile->specialNeeds->find($specialneed->id)->pivot->permanente) ? 'checked' : '' }} />
+										Não
+									</label> 
+								</div>							
 							</div>
 						</div>
-					</div>
 
-					<hr />
+						<hr />
 					@endforeach
 
 					<!-- Submit form -->
