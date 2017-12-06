@@ -53,14 +53,9 @@
 				<hr/>
 				<div class="row">
 					<div class="form-group">						
-						<a href="/selectiveprocess/create"> 
-							<div class="col-md-5 adm" class="btn btn-success">
-								Homologação<i class="fa fa-users"></i>
-							</div>
-						</a>
-						<a href="/specialneed"> 
-							<div class="col-md-5 adm" class="btn btn-success">
-								outro <i class="fa fa-blind"></i>
+						<a href="/admin/show"> 
+							<div class="col-md-11 adm" class="btn btn-success">
+								Homologação de Isenções <i class="fa fa-users"></i>
 							</div>
 						</a>
 					</div>

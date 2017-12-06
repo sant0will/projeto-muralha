@@ -13,6 +13,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+  <!--Menu Superior-->
   <header class="header">
     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
       <div class="row">
@@ -33,29 +35,35 @@
       </div>
     </naxv>
   </header>
+
+  <!--Menu Lateral-->
   <div class="main"> 
     <aside>
       <div class="left w3-collapse w3-card w3-animate-left">
         <div class="item">             
           <span class="fa fa-user-o fafa fa-lg"></span>
-
+          <!--Verificação para obrigar a criação do perfil-->
+          @if ((Auth::user()->profile) != null)
           @if (Auth::user()->profile)
           <a href="{{action('ProfileController@show', Auth::user()->profile->id)}}">Perfil</a>
           @else
           <a href="/profile/create">Perfil</a>
           @endif
-          @if ((Auth::user()->profile) != null)
+          
         </div>
+
         <div class="item">
           <span class="fa fa-calendar fafa fa-lg"></span><a href="/selectiveprocess">Processos Seletivos</a>
         </div>
-        
+
+        <!--Habilitar apenas para admins-->
         @if ((Auth::user()->profile->adm) == 1)
         <div class="item">
           <span class="fa fa-user-secret fafa fa-lg"></span><a href="/admin">Parte Administrativa</a>
         </div>
         @endif   
         
+        <!--Habilitar apenas para users-->
         @if ((Auth::user()->profile->adm) == 0)
         <div class="item">
           <span class="fa fa-check-circle-o fafa fa-lg"></span><a href="{{action('SubscriptionController@show', Auth::user()->profile->id)}}">Inscrições</a>
